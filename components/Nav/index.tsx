@@ -39,7 +39,7 @@ const Nav: React.FC = () => {
       <NextLink href="/">
         <Link
           _hover={{ textDecoration: 'none' }}
-          fontWeight="bold"
+          fontWeight="semibold"
           fontSize="sm"
         >
           Typeform
