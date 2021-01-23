@@ -7,10 +7,8 @@ import {
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
-const isSSR = typeof window === 'undefined';
-
 const createIsomorphLink = () => {
-  if (isSSR) {
+  if (typeof window === 'undefined') {
     const { SchemaLink } = require('@apollo/client/link/schema');
     const { schema } = require('./schema');
 
@@ -27,7 +25,7 @@ const createIsomorphLink = () => {
 
 const createApolloClient = () => {
   return new ApolloClient({
-    ssrMode: isSSR,
+    ssrMode: typeof window === 'undefined',
     link: createIsomorphLink(),
     cache: new InMemoryCache(),
   });
@@ -41,7 +39,7 @@ export function initializeApollo(initialState: any = null) {
     _apolloClient.cache.restore({ ...existingCache, ...initialState });
   }
 
-  if (isSSR) {
+  if (typeof window === 'undefined') {
     return _apolloClient;
   }
 
