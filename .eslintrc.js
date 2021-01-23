@@ -28,6 +28,7 @@ module.exports = {
     '@typescript-eslint/triple-slash-reference': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-empty-interface': 'warn',
+    '@typescript-eslint/no-var-requires': 'off',
     'react/no-direct-mutation-state': 'off',
     'react/no-deprecated': 'off',
     'react/no-string-refs': 'off',

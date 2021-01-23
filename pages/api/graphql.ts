@@ -1,11 +1,9 @@
 import { ApolloServer } from 'apollo-server-micro';
 
-import { rootResolver } from '../../apollo/resolvers';
-import { typeDefsSchema } from '../../apollo/typeDefs';
+import { schema } from '../../apollo/schema';
 
 const server = new ApolloServer({
-  resolvers: rootResolver,
-  typeDefs: typeDefsSchema,
+  schema,
 });
 
 export const config = {

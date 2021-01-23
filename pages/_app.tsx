@@ -1,19 +1,26 @@
 import { AppProps } from 'next/app';
+import { ApolloProvider } from '@apollo/client';
 import { ThemeProvider, theme, CSSReset } from '@chakra-ui/react';
 import Head from 'next/head';
 
 import GlobalStyle from '../components/GlobalStyle';
+import { useApollo } from '../apollo/client';
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
+  console.log('INITIal: ', pageProps.initialApolloState);
+  const apolloClient = useApollo(pageProps.initialApolloState);
+
   return (
-    <ThemeProvider theme={theme}>
-      <CSSReset />
-      <Head>
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-      </Head>
-      <GlobalStyle />
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <ApolloProvider client={apolloClient}>
+      <ThemeProvider theme={theme}>
+        <CSSReset />
+        <Head>
+          <meta content="width=device-width, initial-scale=1" name="viewport" />
+        </Head>
+        <GlobalStyle />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </ApolloProvider>
   );
 };
 
