@@ -7,6 +7,6 @@ export const user = gql`
     name: String!
   }
   extend type Query {
-    getUser(id: String!): User!
+    user(id: String!): User!
   }
 `;

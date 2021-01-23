@@ -1,7 +1,7 @@
-import { getUser } from './user/getUser';
+import { user } from './user/getUser';
 
-export const rootResolver = {
+export const resolvers = {
   Query: {
-    getUser,
+    user,
   },
 };
