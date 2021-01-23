@@ -39,9 +39,13 @@ export function initializeApollo(initialState: any = null) {
     _apolloClient.cache.restore({ ...existingCache, ...initialState });
   }
 
-  if (typeof window === 'undefined') return _apolloClient;
+  if (typeof window === 'undefined') {
+    return _apolloClient;
+  }
 
-  if (!apolloClient) apolloClient = _apolloClient;
+  if (!apolloClient) {
+    apolloClient = _apolloClient;
+  }
 
   return _apolloClient;
 }
