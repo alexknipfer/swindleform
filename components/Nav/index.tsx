@@ -1,6 +1,5 @@
 import { Box, Text } from '@chakra-ui/react';
-import { useQuery } from '@apollo/client';
-import gql from 'graphql-tag';
+import { useQuery, gql } from '@apollo/client';
 import Link from 'next/link';
 import { User } from '@/models/user';
 import { initializeApollo } from '@/apollo/client';
