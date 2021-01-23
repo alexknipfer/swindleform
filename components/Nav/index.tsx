@@ -1,6 +1,6 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Text, Flex, Spacer, Link } from '@chakra-ui/react';
 import { useQuery, gql } from '@apollo/client';
-import Link from 'next/link';
+import NextLink from 'next/link';
 import { User } from '@/models/user';
 import { initializeApollo } from '@/apollo/client';
 
@@ -20,10 +20,22 @@ const Nav: React.FC = () => {
   });
 
   return (
-    <Box borderBottom="1px" borderBottomColor="gray.200" h="64px">
-      <Link href="/">Home</Link>
-      <Text>{data?.user.name}</Text>
-    </Box>
+    <Flex
+      as="header"
+      align="center"
+      borderBottom="1px"
+      borderBottomColor="gray.200"
+      h="64px"
+      px={5}
+    >
+      <NextLink href="/">
+        <Link _hover={{ textDecoration: 'none' }} fontSize="sm">
+          Typeform
+        </Link>
+      </NextLink>
+      <Spacer />
+      <Text fontSize="sm">{data?.user.name}</Text>
+    </Flex>
   );
 };
 

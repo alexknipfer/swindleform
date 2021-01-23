@@ -1,5 +1,5 @@
 import { Heading } from '@chakra-ui/react';
-import WorkspacesLayout from '@/layouts/WorkspacesLayout';
+import WorkspacesLayout from '@/layouts/Workspaces';
 
 const Workspaces: React.FC = () => {
   return (
