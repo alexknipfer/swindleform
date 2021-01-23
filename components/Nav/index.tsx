@@ -2,9 +2,8 @@ import { Box, Text } from '@chakra-ui/react';
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Link from 'next/link';
-
-import { initializeApollo } from '../../apollo/client';
-import { User } from '../../models/user';
+import { User } from '@/models/user';
+import { initializeApollo } from '@/apollo/client';
 
 const UserQuery = gql`
   query UserQuery($id: String!) {
