@@ -1,4 +1,12 @@
-import { Text, Flex, Spacer, Link } from '@chakra-ui/react';
+import {
+  Text,
+  Flex,
+  Spacer,
+  Link,
+  SkeletonCircle,
+  HStack,
+  Skeleton,
+} from '@chakra-ui/react';
 import { useQuery, gql } from '@apollo/client';
 import NextLink from 'next/link';
 import { User } from '@/models/user';
@@ -15,7 +23,7 @@ const UserQuery = gql`
 `;
 
 const Nav: React.FC = () => {
-  const { data } = useQuery<{ user: User }>(UserQuery, {
+  const { data, loading } = useQuery<{ user: User }>(UserQuery, {
     variables: { id: 'testUserId' },
   });
 
@@ -34,7 +42,14 @@ const Nav: React.FC = () => {
         </Link>
       </NextLink>
       <Spacer />
-      <Text fontSize="sm">{data?.user.name}</Text>
+      {loading ? (
+        <HStack>
+          <SkeletonCircle size="6" />
+          <Skeleton height="15px" w={20} />
+        </HStack>
+      ) : (
+        <Text fontSize="sm">{data?.user.name}</Text>
+      )}
     </Flex>
   );
 };
