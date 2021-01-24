@@ -8,7 +8,6 @@ const GlobalStyle: React.FC = () => (
         height: 100%;
         width: 100%;
         font-weight: 400;
-        font-size: calc(12px + 0.9vw);
       }
       *,
       *:after,
