@@ -13,6 +13,6 @@ export const user = gql`
 
 export const createUser = gql`
   extend type Mutation {
-    createUser(username: ID!, password: String): String
+    createUser(username: String!, password: String!): String
   }
 `;
