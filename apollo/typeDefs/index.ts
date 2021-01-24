@@ -1,4 +1,4 @@
 import { root } from './root';
-import { user } from './user';
+import { user, createUser } from './user';
 
-export const typeDefs = [root, user];
+export const typeDefs = [root, user, createUser];
