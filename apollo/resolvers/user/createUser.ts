@@ -1,4 +1,8 @@
 import bcrypt from 'bcryptjs';
+import { getConnection } from 'typeorm';
+
+import stuff from '../../../db/connection';
+import { User } from '../../../entities/User';
 
 interface CreateUserArgs {
   username: string;
@@ -9,7 +13,29 @@ export const createUser = async (
   _: Record<string, never>,
   { username, password }: CreateUserArgs,
 ) => {
-  const hash = await bcrypt.hash(password, 10);
+  try {
+    let repo: any;
+    if (stuff.isConnected()) {
+      repo = getConnection().getRepository(User);
+    }
+    // const userRepo = await stuff
+    //   .getConnection()
+    //   .connect()
+    //   .then((connection) => connection.getRepository(User));
 
-  return `${username}:${hash}`;
+    const passwordHash = await bcrypt.hash(password, 10);
+    const newUser = repo.create({
+      username,
+      passwordHash,
+    });
+
+    await repo.save(newUser);
+
+    return { __typename: 'CreatedUser', ...newUser };
+  } catch (error) {
+    return {
+      __typename: 'CreateUserError',
+      message: 'Error creating user',
+    };
+  }
 };

@@ -6,9 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "g:migration": "yarn typeorm:local migration:generate -n",
+    "typeorm:local": "yarn local ./node_modules/typeorm/cli.js",
     "prettier": "prettier --write \"**/*.{tsx,ts,css,md,js,html}\"",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "npm run lint -- --fix"
+    "local": "DOTENV_CONFIG_PATH=./.env.typeorm ts-node -P ./tsconfig.yarn.json -r dotenv/config",
+    "lint:fix": "npm run lint -- --fix",
+    "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js"
   },
   "husky": {
     "hooks": {
@@ -32,18 +36,26 @@
     "@emotion/styled": "^11.0.0",
     "apollo-server-micro": "^2.19.2",
     "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
     "framer-motion": "^3.2.2-rc.1",
     "graphql": "^15.4.0",
     "next": "10.0.5",
+    "pg": "^8.5.1",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^9.1.1",
+    "typeorm": "^0.2.30"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-decorators": "^7.12.12",
     "@types/bcryptjs": "^2.4.2",
     "@types/node": "^14.14.22",
     "@types/react": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^4.14.0",
     "@typescript-eslint/parser": "^4.14.0",
+    "babel-plugin-transform-typescript-metadata": "^0.3.1",
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-import": "^2.22.1",
