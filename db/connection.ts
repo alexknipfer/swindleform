@@ -11,8 +11,6 @@ const sortedMigraitons = Object.values(migrations).sort(
   },
 );
 
-console.log(sortedMigraitons);
-
 const options: Record<string, ConnectionOptions> = {
   default: {
     type: 'postgres',
