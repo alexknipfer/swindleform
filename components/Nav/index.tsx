@@ -7,10 +7,12 @@ import {
   HStack,
   Skeleton,
 } from '@chakra-ui/react';
+import { Fragment } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import NextLink from 'next/link';
 import { User } from '@/models/user';
 import { initializeApollo } from '@/apollo/client';
+import { useSession } from 'next-auth/client';
 
 const UserQuery = gql`
   query UserQuery($id: String!) {
@@ -26,6 +28,7 @@ const Nav: React.FC = () => {
   const { data, loading } = useQuery<{ user: User }>(UserQuery, {
     variables: { id: 'testUserId' },
   });
+  const [session] = useSession();
 
   return (
     <Flex
@@ -48,7 +51,12 @@ const Nav: React.FC = () => {
           <Skeleton height="15px" w={20} />
         </HStack>
       ) : (
-        <Text fontSize="sm">{data?.user.name}</Text>
+        <Fragment>
+          {session && (
+            <Text fontSize="sm">Signed in as: {session.user.email}</Text>
+          )}
+          <Text fontSize="sm">User queried: {data?.user.name}</Text>
+        </Fragment>
       )}
     </Flex>
   );
