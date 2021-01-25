@@ -17,7 +17,6 @@
     "noImplicitAny": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-
     "emitDecoratorMetadata": true,
     "paths": {
       "@/components/*": ["components/*"],
