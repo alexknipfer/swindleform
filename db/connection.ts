@@ -2,19 +2,25 @@ import 'reflect-metadata';
 import { Connection, ConnectionOptions, getConnectionManager } from 'typeorm';
 
 import { appConfig } from '../config/appConfig';
-import { User } from '../entities/User';
-import { User1611536120958 } from '../migrations/1611536120958-User';
+import * as entities from '../entities';
+import * as migrations from '../migrations';
+
+const sortedMigraitons = Object.values(migrations).sort(
+  (classprotoa: any, classprotob: any) => {
+    return classprotoa.filename > classprotob ? -1 : 1;
+  },
+);
+
+console.log(sortedMigraitons);
 
 const options: Record<string, ConnectionOptions> = {
   default: {
     type: 'postgres',
     url: appConfig.postgres.url,
-    entities: [
-      User, // etc...
-    ],
-    migrations: [User1611536120958],
-    migrationsRun: true,
+    entities: Object.values(entities),
     uuidExtension: 'pgcrypto',
+    migrations: sortedMigraitons,
+    migrationsRun: true,
   },
 };
 
