@@ -14,6 +14,7 @@ const options: Record<string, ConnectionOptions> = {
     ],
     migrations: [User1611536120958],
     migrationsRun: true,
+    uuidExtension: 'pgcrypto',
   },
 };
 
