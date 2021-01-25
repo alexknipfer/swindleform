@@ -1,3 +1,4 @@
+import { NextPage } from 'next';
 import { useFormik } from 'formik';
 import {
   FormControl,
@@ -10,15 +11,23 @@ import {
   Flex,
   Button,
 } from '@chakra-ui/react';
+import { csrfToken, signIn, getSession } from 'next-auth/client';
+import { useRouter } from 'next/router';
 
-const Login: React.FC = () => {
-  const { errors, touched, values, handleChange } = useFormik({
+interface Props {
+  token: string;
+}
+
+const Login: NextPage<Props> = ({ token }) => {
+  const { push } = useRouter();
+  const { errors, touched, values, handleChange, handleSubmit } = useFormik({
     initialValues: {
       username: '',
       password: '',
     },
-    onSubmit: () => {
-      // Submit values
+    onSubmit: async ({ username }) => {
+      await signIn('email', { email: username });
+      push('/');
     },
   });
 
@@ -31,7 +40,8 @@ const Login: React.FC = () => {
         <Text my={8} fontSize="lg" color="gray.600">
           Hello, who&apos;s this?
         </Text>
-        <form>
+        <form onSubmit={handleSubmit}>
+          <input name="csrfToken" type="hidden" defaultValue={token} />
           <VStack spacing={4}>
             <FormControl isInvalid={errors.username && touched.username}>
               <FormLabel htmlFor="username">Username</FormLabel>
@@ -44,17 +54,6 @@ const Login: React.FC = () => {
               />
               <FormErrorMessage>{errors.username}</FormErrorMessage>
             </FormControl>
-            <FormControl isInvalid={errors.password && touched.password}>
-              <FormLabel htmlFor="password">Password</FormLabel>
-              <Input
-                type="password"
-                id="password"
-                name="password"
-                value={values.password}
-                onChange={handleChange}
-              />
-              <FormErrorMessage>{errors.password}</FormErrorMessage>
-            </FormControl>
             <Button type="submit" w="full" mt={4}>
               Log in to Typeform
             </Button>
@@ -64,5 +63,25 @@ const Login: React.FC = () => {
     </Flex>
   );
 };
+
+export async function getServerSideProps(ctx: any) {
+  const session = await getSession(ctx);
+  const token = await csrfToken(ctx);
+
+  if (session) {
+    ctx.res.writeHead(302, { Location: '/' });
+    ctx.res.end();
+
+    return {
+      props: {},
+    };
+  }
+
+  return {
+    props: {
+      token,
+    },
+  };
+}
 
 export default Login;
