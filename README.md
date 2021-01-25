@@ -1,3 +1,9 @@
+## Generate a New Migration
+
+`npm run g:migration -- <Your Migration Name>`
+add it to the `/migrations/index.ts` export file
+NOTE: you must have local pg running so it can "look" at the existing db schema
+
 ## Running the development server
 
 First, run the development server:
