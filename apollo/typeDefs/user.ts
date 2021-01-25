@@ -17,12 +17,7 @@ export const createUser = gql`
     username: String!
   }
 
-  type CreateUserError {
-    message: String!
-  }
-
-  union CreateUserResult = CreatedUser | CreateUserError
   extend type Mutation {
-    createUser(username: String!, password: String!): CreateUserResult
+    createUser(username: String!, password: String!): CreatedUser!
   }
 `;
