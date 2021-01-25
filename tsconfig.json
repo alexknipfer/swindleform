@@ -19,7 +19,8 @@
       "@/components/*": ["components/*"],
       "@/layouts/*": ["layouts/*"],
       "@/apollo/*": ["apollo/*"],
-      "@/models/*": ["models/*"]
+      "@/models/*": ["models/*"],
+      "@/config/*": ["config/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
