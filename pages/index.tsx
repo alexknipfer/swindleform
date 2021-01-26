@@ -1,12 +1,13 @@
-import Link from 'next/link';
+import { Heading } from '@chakra-ui/react';
+import WorkspacesLayout from '@/layouts/Workspaces';
+import withAuthentication from '@/hoc/withAuthentication';
 
-const Home: React.FC = () => {
+const Workspaces: React.FC = () => {
   return (
-    <div>
-      <h1>Home</h1>
-      <Link href="/workspaces">Go to Workspaces</Link>
-    </div>
+    <WorkspacesLayout>
+      <Heading as="h1">Manage Workspaces</Heading>
+    </WorkspacesLayout>
   );
 };
 
-export default Home;
+export default withAuthentication(Workspaces);
