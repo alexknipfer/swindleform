@@ -1,5 +1,6 @@
 import { Heading } from '@chakra-ui/react';
 import WorkspacesLayout from '@/layouts/Workspaces';
+import withAuthentication from '@/hoc/withAuthentication';
 
 const Workspaces: React.FC = () => {
   return (
@@ -9,4 +10,4 @@ const Workspaces: React.FC = () => {
   );
 };
 
-export default Workspaces;
+export default withAuthentication(Workspaces);

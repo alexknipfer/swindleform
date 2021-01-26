@@ -1,8 +1,13 @@
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/client';
+import { Spinner } from '@chakra-ui/react';
 
 const Home: React.FC = () => {
-  const [session] = useSession();
+  const [session, loading] = useSession();
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div>
