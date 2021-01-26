@@ -1,4 +1,4 @@
-import { NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import { useFormik } from 'formik';
 import {
   FormControl,
@@ -63,7 +63,7 @@ const Login: NextPage<Props> = ({ token }) => {
   );
 };
 
-export async function getServerSideProps(ctx: any) {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session = await getSession(ctx);
   const token = await csrfToken(ctx);
 
@@ -81,6 +81,6 @@ export async function getServerSideProps(ctx: any) {
       token,
     },
   };
-}
+};
 
 export default Login;
