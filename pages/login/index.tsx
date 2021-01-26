@@ -22,11 +22,10 @@ const Login: NextPage<Props> = ({ token }) => {
   const { push } = useRouter();
   const { errors, touched, values, handleChange, handleSubmit } = useFormik({
     initialValues: {
-      username: '',
-      password: '',
+      email: '',
     },
-    onSubmit: async ({ username }) => {
-      await signIn('email', { email: username });
+    onSubmit: async ({ email }) => {
+      await signIn('email', { email });
       push('/');
     },
   });
@@ -43,16 +42,16 @@ const Login: NextPage<Props> = ({ token }) => {
         <form onSubmit={handleSubmit}>
           <input name="csrfToken" type="hidden" defaultValue={token} />
           <VStack spacing={4}>
-            <FormControl isInvalid={errors.username && touched.username}>
-              <FormLabel htmlFor="username">Username</FormLabel>
+            <FormControl isInvalid={errors.email && touched.email}>
+              <FormLabel htmlFor="email">Email</FormLabel>
               <Input
-                type="text"
-                id="username"
-                name="username"
-                value={values.username}
+                type="email"
+                id="email"
+                name="email"
+                value={values.email}
                 onChange={handleChange}
               />
-              <FormErrorMessage>{errors.username}</FormErrorMessage>
+              <FormErrorMessage>{errors.email}</FormErrorMessage>
             </FormControl>
             <Button type="submit" w="full" mt={4}>
               Log in to Typeform
