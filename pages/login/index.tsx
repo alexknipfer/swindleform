@@ -12,21 +12,18 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { csrfToken, signIn, getSession } from 'next-auth/client';
-import { useRouter } from 'next/router';
 
 interface Props {
   token: string;
 }
 
 const Login: NextPage<Props> = ({ token }) => {
-  const { push } = useRouter();
   const { errors, touched, values, handleChange, handleSubmit } = useFormik({
     initialValues: {
       email: '',
     },
     onSubmit: async ({ email }) => {
-      await signIn('email', { email });
-      push('/');
+      signIn('email', { email });
     },
   });
 
