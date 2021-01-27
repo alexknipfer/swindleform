@@ -45,7 +45,7 @@ const Nav: React.FC = () => {
           fontWeight="semibold"
           fontSize="sm"
         >
-          Typeform
+          SwindleForm
         </Link>
       </NextLink>
       <Spacer />

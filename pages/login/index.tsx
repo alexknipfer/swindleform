@@ -31,7 +31,7 @@ const Login: NextPage<Props> = ({ token }) => {
     <Flex p={[4, 0]} align={['start', 'center']} justify="center" h="full">
       <Box w={['100%', 64]} textAlign="center">
         <Text fontWeight="semibold" fontSize="3xl" mb={8}>
-          Typeform
+          SwindleForm
         </Text>
         <Text my={8} fontSize="lg" color="gray.600">
           Hello, who&apos;s this?
@@ -51,7 +51,7 @@ const Login: NextPage<Props> = ({ token }) => {
               <FormErrorMessage>{errors.email}</FormErrorMessage>
             </FormControl>
             <Button type="submit" w="full" mt={4}>
-              Log in to Typeform
+              Log in to SwindleForm
             </Button>
           </VStack>
         </form>
