@@ -5,6 +5,7 @@ import Head from 'next/head';
 import { Provider } from 'next-auth/client';
 import GlobalStyle from '@/components/GlobalStyle';
 import { useApollo } from '@/apollo/client';
+import { theme } from '@/config/chakraThemeConfig';
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   const apolloClient = useApollo(pageProps.initialApolloState);
@@ -12,7 +13,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <ApolloProvider client={apolloClient}>
       <Provider session={pageProps.session}>
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
           <CSSReset />
           <Head>
             <meta
