@@ -11,12 +11,7 @@ export const user = async (
   { db }: { db: DbConnection },
 ) => {
   const user = await db.users.findOne({ _id: new ObjectID(args.id) as any });
-  const workspaces = await new Promise((resolve, reject) =>
-    db.workspaceRepo.getAll(user.workspaces, (err, workspaces) => {
-      if (err) return reject(err);
-      resolve(workspaces);
-    }),
-  );
+  const workspaces = await db.workspaceRepo.getAll(user.workspaces);
 
   console.log({ workspaces });
 

@@ -31,13 +31,7 @@ const options: InitOptions = {
       workspace.init();
       workspace.addUser({ userId: message.id });
       workspace.updateName({ name: 'default' });
-      await new Promise<void>((resolve, reject) =>
-        db.workspaceRepo.commit(workspace, (err) => {
-          if (err) return reject(err);
-
-          resolve();
-        }),
-      );
+      await db.workspaceRepo.commit(workspace, {});
       await db.users.findOneAndUpdate(
         { _id: message.id },
         { $set: { workspaces: [workspace.id] } },
