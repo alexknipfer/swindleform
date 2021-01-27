@@ -1,4 +1,3 @@
-import { theme } from '@/config/chakraThemeConfig';
 import { ChakraProperties } from '@/models/chakraProperties';
 import {
   ChakraProvider,
@@ -10,7 +9,6 @@ import { GetServerSideProps, NextPage } from 'next';
 const Chakra: NextPage<ChakraProperties> = ({ cookies, children }) => {
   return (
     <ChakraProvider
-      theme={theme}
       colorModeManager={
         cookies ? cookieStorageManager(cookies) : localStorageManager
       }
