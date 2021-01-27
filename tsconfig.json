@@ -21,7 +21,8 @@
       "@/apollo/*": ["apollo/*"],
       "@/models/*": ["models/*"],
       "@/config/*": ["config/*"],
-      "@/hoc/*": ["hoc/*"]
+      "@/hoc/*": ["hoc/*"],
+      "@/db/*": ["db/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

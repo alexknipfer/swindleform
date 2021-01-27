@@ -1,4 +1,4 @@
-import { DbConnection } from '@/models/index';
+import { DbConnection } from '@/db/dbConnection';
 import { ObjectID } from 'mongodb';
 
 interface GetUserArgs {

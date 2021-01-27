@@ -1,6 +1,5 @@
 import { EventEmitter } from 'events';
 
-import { MongoClient } from 'mongodb';
 import { Entity } from 'sourced';
 export interface TConstructor<TSourcedEntity extends Entity> {
   new (snapshot?: any, events?: any[]): TSourcedEntity;
@@ -21,5 +20,3 @@ export declare class Repository<T extends Entity> extends EventEmitter {
   );
 }
 export default Repository;
-
-export type mongo = MongoClient;
