@@ -59,7 +59,6 @@ const Nav: React.FC = () => {
           {session && (
             <Text fontSize="sm">Signed in as: {session.user.email}</Text>
           )}
-          {/* <Text fontSize="sm">User queried: {data?.user.name}</Text> */}
         </Fragment>
       )}
     </Flex>
