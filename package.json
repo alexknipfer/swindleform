@@ -35,7 +35,7 @@
     "bcryptjs": "^2.4.3",
     "formik": "^2.2.6",
     "framer-motion": "^3.2.2-rc.1",
-    "graphql": "^15.4.0",
+    "graphql": "^15.5.0",
     "mongodb": "^3.6.3",
     "next": "10.0.5",
     "next-auth": "^3.1.0",
@@ -44,6 +44,9 @@
     "sourced": "^2.0.8",
     "sourced-repo-mongo": "^1.0.0",
     "uuid": "^8.3.2"
+  },
+  "peerOptionalDependencies": {
+    "mongodb": "^3.6.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",

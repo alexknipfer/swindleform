@@ -2,7 +2,7 @@ import { EventEmitter } from 'events';
 
 import { MongoClient } from 'mongodb';
 import { Entity } from 'sourced';
-interface TConstructor<TSourcedEntity extends Entity> {
+export interface TConstructor<TSourcedEntity extends Entity> {
   new (snapshot?: any, events?: any[]): TSourcedEntity;
 }
 interface RepositoryOptions {
