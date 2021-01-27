@@ -38,6 +38,16 @@ const options: InitOptions = {
       );
     },
   },
+  callbacks: {
+    // TODO - better types
+    async session(session: any, user: any) {
+      if (user && !session.user.id) {
+        session.user.id = user.id;
+      }
+
+      return session;
+    },
+  },
 };
 
 export default (req: NextApiRequest, res: NextApiResponse) =>

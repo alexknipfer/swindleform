@@ -71,3 +71,21 @@ class MyNewEntity extends Entity {
   }
 }
 ```
+
+2. Create the repository - the `DbConnection` class is the consolodation point for these to handle the logic of ensuring the database is connected
+
+- think of the repository as the data access layer - it handles deconstructing the entity into snapshots and events, and will also properly "reconstruct" or replay the events and snapshots from the db back into memory to an Entity class instance
+- I also added a convenience method to expose all of the `Repository` class' methods as async calls with Promise interfaces to avoid callbacks. Note that there are transactional circumstances where this could interfere with the existing `.enqueue` and so this is a rough draft - we may need to prefix these with `asyncGet`,`asyncGetAll`, etc.
+
+```ts
+import { MyNewEntity } from '../my-file.ts';
+import { Repository } from 'sourced-repo-mongo';
+
+const repo = new Repository(MyNewEntity);
+const instance = new MyNewEntity();
+instance.updateSomeAttribute({ myValue: 'hello world' });
+
+repo.commit(instance, {}, (err) => {
+  // if no error then success
+});
+```

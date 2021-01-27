@@ -20,15 +20,22 @@ const UserQuery = gql`
       id
       email
       name
+      workspaces {
+        id
+        workspaceName
+        users
+      }
     }
   }
 `;
 
 const Nav: React.FC = () => {
-  const { loading } = useQuery<{ user: User }>(UserQuery, {
-    variables: { id: 'testUserId' },
-  });
+  // TODO - figure out how to augment this session object properly so we don't have to cast as any
   const [session] = useSession();
+  const { loading, data } = useQuery<{ user: User }>(UserQuery, {
+    variables: { id: session && (session.user as any).id },
+  });
+  console.log('Nice to see our event sourced model in the console', data);
 
   return (
     <Flex

@@ -1,4 +1,4 @@
-import { DbConnection } from '@/db/dbConnection';
+import { GQLContext } from '@/apollo/interfaces';
 import { ObjectID } from 'mongodb';
 
 interface GetUserArgs {
@@ -8,11 +8,18 @@ interface GetUserArgs {
 export const user = async (
   _: Record<string, never>,
   args: GetUserArgs,
-  context: { db: DbConnection },
+  context: GQLContext,
 ) => {
-  // TODO - Already added session to context but
-  // we need a reusable type to make this context easier to use everywhere
-  const { db } = context;
+  const {
+    db,
+    session: {
+      user: { id },
+    },
+  } = context;
+
+  console.log('Proving the userid is added successfully from the session', {
+    id,
+  });
   const user = await db.users.findOne({ _id: new ObjectID(args.id) as any });
   const workspaces = (await db.workspaceRepo.getAll(user.workspaces)).map((w) =>
     w.snapshot(),

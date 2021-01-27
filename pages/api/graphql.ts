@@ -7,7 +7,6 @@ import { db } from '../../models';
 const server = new ApolloServer({
   schema,
   async context({ req }) {
-    // TODO - need to see what else convenient comes through here
     const [session, dbIntance] = await Promise.all([
       getSession({ req }),
       db.ensureConnection().then(() => db),
