@@ -7,8 +7,6 @@ import {
   HStack,
   Skeleton,
   useColorModeValue,
-  IconButton,
-  useColorMode,
 } from '@chakra-ui/react';
 import { Fragment } from 'react';
 import { useQuery, gql } from '@apollo/client';
@@ -16,7 +14,8 @@ import NextLink from 'next/link';
 import { User } from '@/models/user';
 import { initializeApollo } from '@/apollo/client';
 import { useSession } from 'next-auth/client';
-import { MoonIcon } from '@chakra-ui/icons';
+
+import ColorModeSwitch from '../ColorModeSwitch';
 
 const UserQuery = gql`
   query UserQuery($id: String!) {
@@ -33,7 +32,6 @@ const Nav: React.FC = () => {
     variables: { id: 'testUserId' },
   });
   const [session] = useSession();
-  const { colorMode, toggleColorMode } = useColorMode();
   const background = useColorModeValue('gray.200', 'gray.600');
 
   return (
@@ -66,14 +64,7 @@ const Nav: React.FC = () => {
             <Text fontSize="sm">Signed in as: {session.user.email}</Text>
           )}
           <Text fontSize="sm">User queried: {data?.user.name}</Text>
-          <IconButton
-            colorScheme="teal"
-            variant={colorMode === 'dark' ? 'solid' : 'outline'}
-            aria-label="Call Segun"
-            size="sm"
-            icon={<MoonIcon />}
-            onClick={toggleColorMode}
-          />
+          <ColorModeSwitch />
         </Fragment>
       )}
     </Flex>
