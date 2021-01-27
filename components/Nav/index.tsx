@@ -25,7 +25,7 @@ const UserQuery = gql`
 `;
 
 const Nav: React.FC = () => {
-  const { data, loading } = useQuery<{ user: User }>(UserQuery, {
+  const { loading } = useQuery<{ user: User }>(UserQuery, {
     variables: { id: 'testUserId' },
   });
   const [session] = useSession();
@@ -59,7 +59,7 @@ const Nav: React.FC = () => {
           {session && (
             <Text fontSize="sm">Signed in as: {session.user.email}</Text>
           )}
-          <Text fontSize="sm">User queried: {data?.user.name}</Text>
+          {/* <Text fontSize="sm">User queried: {data?.user.name}</Text> */}
         </Fragment>
       )}
     </Flex>
