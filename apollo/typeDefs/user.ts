@@ -18,9 +18,3 @@ export const user = gql`
     user(id: String!): User!
   }
 `;
-
-export const createUser = gql`
-  extend type Mutation {
-    createUser(username: String!, password: String!): String
-  }
-`;

@@ -1,13 +1,21 @@
 import { ApolloServer } from 'apollo-server-micro';
 import { schema } from '@/apollo/schema';
+import { getSession } from 'next-auth/client';
 
 import { db } from '../../models';
 
 const server = new ApolloServer({
   schema,
-  async context() {
+  async context({ req }) {
+    // TODO - need to see what else convenient comes through here
+    const [session, dbIntance] = await Promise.all([
+      getSession({ req }),
+      db.ensureConnection().then(() => db),
+    ]);
+
     return {
-      db: await db.ensureConnection().then(() => db),
+      db: dbIntance,
+      session,
     };
   },
 });

@@ -32,7 +32,6 @@
     "@emotion/react": "^11.1.4",
     "@emotion/styled": "^11.0.0",
     "apollo-server-micro": "^2.19.2",
-    "bcryptjs": "^2.4.3",
     "formik": "^2.2.6",
     "framer-motion": "^3.2.2-rc.1",
     "graphql": "^15.5.0",
