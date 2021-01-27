@@ -6,6 +6,9 @@ import {
   SkeletonCircle,
   HStack,
   Skeleton,
+  useColorModeValue,
+  IconButton,
+  useColorMode,
 } from '@chakra-ui/react';
 import { Fragment } from 'react';
 import { useQuery, gql } from '@apollo/client';
@@ -13,6 +16,7 @@ import NextLink from 'next/link';
 import { User } from '@/models/user';
 import { initializeApollo } from '@/apollo/client';
 import { useSession } from 'next-auth/client';
+import { MoonIcon } from '@chakra-ui/icons';
 
 const UserQuery = gql`
   query UserQuery($id: String!) {
@@ -29,13 +33,15 @@ const Nav: React.FC = () => {
     variables: { id: 'testUserId' },
   });
   const [session] = useSession();
+  const { colorMode, toggleColorMode } = useColorMode();
+  const background = useColorModeValue('gray.200', 'gray.600');
 
   return (
     <Flex
       as="header"
       align="center"
       borderBottom="1px"
-      borderBottomColor="gray.200"
+      borderBottomColor={background}
       h="64px"
       px={5}
     >
@@ -43,7 +49,7 @@ const Nav: React.FC = () => {
         <Link
           _hover={{ textDecoration: 'none' }}
           fontWeight="semibold"
-          fontSize="sm"
+          fontSize="lg"
         >
           Typeform
         </Link>
@@ -60,6 +66,14 @@ const Nav: React.FC = () => {
             <Text fontSize="sm">Signed in as: {session.user.email}</Text>
           )}
           <Text fontSize="sm">User queried: {data?.user.name}</Text>
+          <IconButton
+            colorScheme="teal"
+            variant={colorMode === 'dark' ? 'solid' : 'outline'}
+            aria-label="Call Segun"
+            size="sm"
+            icon={<MoonIcon />}
+            onClick={toggleColorMode}
+          />
         </Fragment>
       )}
     </Flex>
