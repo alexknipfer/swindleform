@@ -40,13 +40,19 @@
     "next": "10.0.5",
     "next-auth": "^3.1.0",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "sourced": "^2.0.8",
+    "sourced-repo-mongo": "^1.0.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/bluebird": "^3.5.33",
+    "@types/mongodb": "^3.6.3",
     "@types/next-auth": "^3.1.21",
     "@types/node": "^14.14.22",
     "@types/react": "^17.0.0",
+    "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.14.0",
     "@typescript-eslint/parser": "^4.14.0",
     "eslint": "^7.18.0",
