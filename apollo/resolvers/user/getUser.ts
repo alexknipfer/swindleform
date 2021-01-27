@@ -11,7 +11,9 @@ export const user = async (
   { db }: { db: DbConnection },
 ) => {
   const user = await db.users.findOne({ _id: new ObjectID(args.id) as any });
-  const workspaces = await db.workspaceRepo.getAll(user.workspaces);
+  const workspaces = (await db.workspaceRepo.getAll(user.workspaces)).map((w) =>
+    w.snapshot(),
+  );
 
   console.log({ workspaces });
 
