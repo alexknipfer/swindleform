@@ -28,10 +28,8 @@ const options: InitOptions = {
     async createUser(message) {
       await db.ensureConnection();
       const workspace = new Workspace();
-      workspace.init();
-      workspace.addUser({ userId: message.id });
-      workspace.updateName({ name: 'default' });
-      await db.workspaceRepo.commit(workspace, {});
+      workspace.init({ firstUserId: message.id });
+      await db.workspaceRepo.commit(workspace);
       await db.users.findOneAndUpdate(
         { _id: message.id },
         { $set: { workspaces: [workspace.id] } },

@@ -1,13 +1,9 @@
 import { GQLContext } from '@/apollo/interfaces';
 import { ObjectID } from 'mongodb';
 
-interface GetUserArgs {
-  id: string;
-}
-
 export const user = async (
   _: Record<string, never>,
-  args: GetUserArgs,
+  args: Record<string, never>,
   context: GQLContext,
 ) => {
   const {
@@ -20,7 +16,8 @@ export const user = async (
   console.log('Proving the userid is added successfully from the session', {
     id,
   });
-  const user = await db.users.findOne({ _id: new ObjectID(args.id) as any });
+  const user = await db.users.findOne({ _id: new ObjectID(id) as any });
+  console.log({ user });
   const workspaces = (await db.workspaceRepo.getAll(user.workspaces)).map((w) =>
     w.snapshot(),
   );
@@ -29,7 +26,5 @@ export const user = async (
     id: args.id,
     workspaces,
     user,
-    email: 'test@email.com',
-    name: 'Test Name',
   };
 };

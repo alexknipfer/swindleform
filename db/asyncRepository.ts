@@ -30,7 +30,7 @@ export const makeRepoAsync = <T extends Entity>(
       }),
     );
 
-  const commit = (entity: T, options?: any): Promise<void> =>
+  const commit = (entity: T, options: any = {}): Promise<void> =>
     new Promise((resolve, reject) => {
       repo.commit(entity, options, (err) => {
         if (err) return reject(err);
@@ -38,7 +38,7 @@ export const makeRepoAsync = <T extends Entity>(
       });
     });
 
-  const commitAll = (entities: T[], options?: any): Promise<void> =>
+  const commitAll = (entities: T[], options: any = {}): Promise<void> =>
     new Promise((resolve, reject) => {
       repo.commitAll(entities, options, (err) => {
         if (err) return reject(err);
