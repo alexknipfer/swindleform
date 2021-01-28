@@ -47,8 +47,4 @@ export class Workspace extends Entity<Workspace, WorkspaceSnapshot> {
     this.users.push(params.userId);
     this.digest('addUser', params);
   }
-
-  snapshot(): WorkspaceSnapshot {
-    return super.snapshot();
-  }
 }
