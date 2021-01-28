@@ -10,11 +10,10 @@ export const user = gql`
   type User {
     id: ID!
     email: String!
-    name: String!
     workspaces: [Workspace!]
   }
 
   extend type Query {
-    user(id: String!): User!
+    user: User!
   }
 `;

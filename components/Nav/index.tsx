@@ -18,11 +18,10 @@ import { useSession } from 'next-auth/client';
 import ColorModeSwitch from '../ColorModeSwitch';
 
 const UserQuery = gql`
-  query UserQuery($id: String!) {
-    user(id: $id) {
+  query UserQuery {
+    user {
       id
       email
-      name
       workspaces {
         id
         workspaceName
@@ -70,7 +69,6 @@ const Nav: React.FC = () => {
           {session && (
             <Text fontSize="sm">Signed in as: {session.user.email}</Text>
           )}
-          <Text fontSize="sm">User queried: {data?.user.name}</Text>
           <ColorModeSwitch />
         </Fragment>
       )}

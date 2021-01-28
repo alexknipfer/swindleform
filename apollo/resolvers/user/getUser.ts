@@ -13,17 +13,14 @@ export const user = async (
     },
   } = context;
 
-  console.log('Proving the userid is added successfully from the session', {
-    id,
-  });
   const user = await db.users.findOne({ _id: new ObjectID(id) as any });
-  console.log({ user });
   const workspaces = (await db.workspaceRepo.getAll(user.workspaces)).map((w) =>
     w.snapshot(),
   );
 
   return {
-    id: args.id,
+    id: user._id.toString(),
+    email: user.email,
     workspaces,
     user,
   };
