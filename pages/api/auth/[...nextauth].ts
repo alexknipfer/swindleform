@@ -1,7 +1,10 @@
 import { appConfig } from '@/config/appConfig';
+import { Workspace } from '@/models/workspace';
 import { NextApiRequest, NextApiResponse } from 'next';
 import NextAuth, { InitOptions } from 'next-auth';
 import Providers from 'next-auth/providers';
+
+import { db } from '../../../models';
 
 const options: InitOptions = {
   providers: [
@@ -20,6 +23,28 @@ const options: InitOptions = {
   database: appConfig.db.connectionString,
   pages: {
     signIn: '/login',
+  },
+  events: {
+    async createUser(message) {
+      await db.ensureConnection();
+      const workspace = new Workspace();
+      workspace.init({ firstUserId: message.id });
+      await db.workspaceRepo.commit(workspace);
+      await db.users.findOneAndUpdate(
+        { _id: message.id },
+        { $set: { workspaces: [workspace.id] } },
+      );
+    },
+  },
+  callbacks: {
+    // TODO - better types
+    async session(session: any, user: any) {
+      if (user && !session.user.id) {
+        session.user.id = user.id;
+      }
+
+      return session;
+    },
   },
 };
 
