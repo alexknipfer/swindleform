@@ -6,6 +6,7 @@ export const user = async (
   args: Record<string, never>,
   context: GQLContext,
 ) => {
+  console.log('CONTEXT: ', context);
   const {
     db,
     session: {
