@@ -12,12 +12,14 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { csrfToken, signIn, getSession } from 'next-auth/client';
+import { ChakraProperties } from '@/models/chakraProperties';
+import Chakra from '@/components/Chakra';
 
 interface Props {
   token: string;
 }
 
-const Login: NextPage<Props> = ({ token }) => {
+const Login: NextPage<Props & ChakraProperties> = ({ token, cookies }) => {
   const { errors, touched, values, handleChange, handleSubmit } = useFormik({
     initialValues: {
       email: '',
@@ -28,35 +30,37 @@ const Login: NextPage<Props> = ({ token }) => {
   });
 
   return (
-    <Flex p={[4, 0]} align={['start', 'center']} justify="center" h="full">
-      <Box w={['100%', 64]} textAlign="center">
-        <Text fontWeight="semibold" fontSize="3xl" mb={8}>
-          SwindleForm
-        </Text>
-        <Text my={8} fontSize="lg" color="gray.600">
-          Hello, who&apos;s this?
-        </Text>
-        <form onSubmit={handleSubmit}>
-          <input name="csrfToken" type="hidden" defaultValue={token} />
-          <VStack spacing={4}>
-            <FormControl isInvalid={errors.email && touched.email}>
-              <FormLabel htmlFor="email">Email</FormLabel>
-              <Input
-                type="email"
-                id="email"
-                name="email"
-                value={values.email}
-                onChange={handleChange}
-              />
-              <FormErrorMessage>{errors.email}</FormErrorMessage>
-            </FormControl>
-            <Button type="submit" w="full" mt={4}>
-              Log in to SwindleForm
-            </Button>
-          </VStack>
-        </form>
-      </Box>
-    </Flex>
+    <Chakra cookies={cookies}>
+      <Flex p={[4, 0]} align={['start', 'center']} justify="center" h="full">
+        <Box w={['100%', 64]} textAlign="center">
+          <Text fontWeight="semibold" fontSize="3xl" mb={8}>
+            SwindleForm
+          </Text>
+          <Text my={8} fontSize="lg" color="gray.600">
+            Hello, who&apos;s this?
+          </Text>
+          <form onSubmit={handleSubmit}>
+            <input name="csrfToken" type="hidden" defaultValue={token} />
+            <VStack spacing={4}>
+              <FormControl isInvalid={errors.email && touched.email}>
+                <FormLabel htmlFor="email">Email</FormLabel>
+                <Input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange}
+                />
+                <FormErrorMessage>{errors.email}</FormErrorMessage>
+              </FormControl>
+              <Button type="submit" w="full" mt={4}>
+                Log in to SwindleForm
+              </Button>
+            </VStack>
+          </form>
+        </Box>
+      </Flex>
+    </Chakra>
   );
 };
 
@@ -75,6 +79,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   return {
     props: {
+      cookies: ctx.req.headers.cookies ?? '',
       token,
     },
   };
