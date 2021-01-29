@@ -1,4 +1,3 @@
-import Chakra from '@/components/Chakra';
 import { Flex, Spinner } from '@chakra-ui/react';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
@@ -20,11 +19,9 @@ function withAuthentication<Props>(
     return session ? (
       <WrappedComponent {...props} />
     ) : (
-      <Chakra>
-        <Flex h="full" w="full" align="center" justify="center">
-          <Spinner size="lg" />
-        </Flex>
-      </Chakra>
+      <Flex h="full" w="full" align="center" justify="center">
+        <Spinner size="lg" />
+      </Flex>
     );
   };
 
