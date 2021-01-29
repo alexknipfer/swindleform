@@ -7,7 +7,7 @@ import GlobalStyle from '@/components/GlobalStyle';
 import { useApollo } from '@/apollo/client';
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
-  const apolloClient = useApollo(pageProps.initialApolloState);
+  const apolloClient = useApollo(pageProps);
 
   return (
     <ApolloProvider client={apolloClient}>
