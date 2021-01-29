@@ -22,7 +22,8 @@
       "@/models/*": ["models/*"],
       "@/config/*": ["config/*"],
       "@/hoc/*": ["hoc/*"],
-      "@/db/*": ["db/*"]
+      "@/db/*": ["db/*"],
+      "@/utils/*": ["utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

@@ -5,6 +5,7 @@ export const user = gql`
     id: ID!
     users: [String!]
     workspaceName: String!
+    formCount: Int!
   }
 
   type User {
