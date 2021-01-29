@@ -12,13 +12,12 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { csrfToken, signIn, getSession } from 'next-auth/client';
-import { ChakraProperties } from '@/models/chakraProperties';
 
 interface Props {
   token: string;
 }
 
-const Login: NextPage<Props & ChakraProperties> = ({ token }) => {
+const Login: NextPage<Props> = ({ token }) => {
   const { errors, touched, values, handleChange, handleSubmit } = useFormik({
     initialValues: {
       email: '',
