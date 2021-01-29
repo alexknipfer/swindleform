@@ -4,12 +4,14 @@ import * as uuid from 'uuid';
 export interface WorkspaceSnapshot extends SnapshotBase {
   users: string[];
   workspaceName: string;
+  formCount: number;
 }
 
 export class Workspace extends Entity<Workspace, WorkspaceSnapshot> {
   id = '';
   users: string[] = [];
   workspaceName = '';
+  formCount = 0;
 
   constructor(snapshot?: any, events?: any[]) {
     super();
