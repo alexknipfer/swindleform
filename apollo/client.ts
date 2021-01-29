@@ -7,21 +7,15 @@ import {
 } from '@apollo/client';
 import merge from 'deepmerge';
 import isEqual from 'lodash/isEqual';
-import { appConfig } from '@/config/appConfig';
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 let apolloClient: ApolloClient<NormalizedCacheObject>;
-
-const getUri = () =>
-  appConfig.vercelSystemEnvironment
-    ? `https://${appConfig.vercelSystemEnvironment}/api/graphql`
-    : `http://localhost:3000/api/graphql`;
 
 const createApolloClient = () => {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: new HttpLink({
-      uri: 'http://localhost:3000/api/graphql',
+      uri: '/api/graphql',
       credentials: 'same-origin',
     }),
     cache: new InMemoryCache(),
