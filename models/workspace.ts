@@ -1,7 +1,12 @@
-import { Entity } from 'sourced';
+import { Entity, SnapshotBase } from 'sourced';
 import * as uuid from 'uuid';
 
-export class Workspace extends Entity {
+export interface WorkspaceSnapshot extends SnapshotBase {
+  users: string[];
+  workspaceName: string;
+}
+
+export class Workspace extends Entity<Workspace, WorkspaceSnapshot> {
   id = '';
   users: string[] = [];
   workspaceName = '';

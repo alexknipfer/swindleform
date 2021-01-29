@@ -12,7 +12,6 @@ export const user = async (
       user: { id },
     },
   } = context;
-
   const user = await db.users.findOne({ _id: new ObjectID(id) as any });
   const workspaces = (await db.workspaceRepo.getAll(user.workspaces)).map((w) =>
     w.snapshot(),
