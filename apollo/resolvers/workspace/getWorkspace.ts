@@ -13,11 +13,10 @@ export const workspace = async (
   } = context;
 
   const workspace = await db.workspaceRepo.get(workspaceId);
-  console.log(workspace);
 
-  if (!workspace || !workspace.users.includes(userId)) {
+  if (!workspace || !workspace.users.map(String).includes(userId)) {
     return null;
   }
 
-  return { workspace: workspace.snapshot() };
+  return workspace.snapshot();
 };
