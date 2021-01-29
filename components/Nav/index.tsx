@@ -9,9 +9,8 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { Fragment } from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { gql } from '@apollo/client';
 import NextLink from 'next/link';
-import { User } from '@/models/user';
 import { initializeApollo } from '@/apollo/client';
 import { useSession } from 'next-auth/client';
 
@@ -32,12 +31,7 @@ const UserQuery = gql`
 `;
 
 const Nav: React.FC = () => {
-  // TODO - figure out how to augment this session object properly so we don't have to cast as any
-  const [session] = useSession();
-  const { loading, data } = useQuery<{ user: User }>(UserQuery, {
-    variables: { id: session && (session.user as any).id },
-  });
-  console.log('Nice to see our event sourced model in the console', data);
+  const [session, loading] = useSession();
   const background = useColorModeValue('gray.200', 'gray.600');
 
   return (
@@ -76,7 +70,7 @@ const Nav: React.FC = () => {
   );
 };
 
-export async function getStaticProps() {
+export async function getServerProps() {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({
