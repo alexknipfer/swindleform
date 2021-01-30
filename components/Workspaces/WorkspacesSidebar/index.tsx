@@ -1,0 +1,74 @@
+import {
+  Box,
+  Flex,
+  HStack,
+  IconButton,
+  Link as CLink,
+  Text,
+  useColorModeValue,
+  useDisclosure,
+} from '@chakra-ui/react';
+import { AddIcon } from '@chakra-ui/icons';
+import Link from 'next/link';
+import { useQuery } from '@apollo/client';
+import { useRouter } from 'next/router';
+import { UserQueryResponse, USER_QUERY } from '@/queries/userQuery';
+
+import { SkeletonList } from '../../SkeletonList';
+import AddWorkspaceModal from '../AddWorkspaceModal';
+
+const WorkspacesSidebar: React.FC = () => {
+  const { data, loading } = useQuery<UserQueryResponse>(USER_QUERY);
+  const { query } = useRouter();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const background = useColorModeValue('gray.200', 'gray.600');
+
+  return (
+    <Box
+      w="256px"
+      borderRight="1px"
+      borderRightColor={background}
+      h="full"
+      pt={5}
+    >
+      <AddWorkspaceModal isOpen={isOpen} onClose={onClose} />
+      <HStack justifyContent="space-between" py={5} px={5}>
+        <Text fontWeight="semibold" fontSize="md">
+          Workspaces
+        </Text>
+        <IconButton
+          icon={<AddIcon />}
+          aria-label="Create Workspace"
+          size="xs"
+          variant="outline"
+          colorScheme="teal"
+          onClick={onOpen}
+        ></IconButton>
+      </HStack>
+      {loading ? (
+        <SkeletonList />
+      ) : (
+        data.user.workspaces.map((w) => (
+          <Flex direction="column" key={w.id}>
+            <Text
+              background={
+                w.id === query.workspaceId ? 'blue.900' : 'transparent'
+              }
+              isTruncated
+              maxWidth="100%"
+              py={1}
+              px={5}
+            >
+              <CLink as={Link} href={`/workspaces/${w.id}`}>
+                {w.workspaceName}
+              </CLink>
+            </Text>
+            {w.formCount}
+          </Flex>
+        ))
+      )}
+    </Box>
+  );
+};
+
+export default WorkspacesSidebar;

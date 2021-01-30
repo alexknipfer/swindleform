@@ -1,6 +1,6 @@
 import { Box, Flex } from '@chakra-ui/react';
 import Nav from '@/components/Nav';
-import WorkspacesSidebar from '@/components/WorkspacesSidebar';
+import WorkspacesSidebar from '@/components/Workspaces/WorkspacesSidebar';
 
 const WorkspacesLayout: React.FC = ({ children }) => {
   return (
