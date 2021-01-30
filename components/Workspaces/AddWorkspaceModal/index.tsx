@@ -21,7 +21,7 @@ import USER_QUERY from '@/queries/UserQuery.graphql';
 import { useRouter } from 'next/router';
 import {
   useCreateWorkspaceMutation,
-  UserQueryQuery,
+  UserQuery,
 } from 'generated/apolloComponents';
 
 interface Props {
@@ -65,7 +65,7 @@ const AddWorkspaceModal: React.FC<Props> = ({ isOpen, onClose }) => {
         },
         update: (proxy, { data }) => {
           try {
-            const cachedUserData = proxy.readQuery<UserQueryQuery>({
+            const cachedUserData = proxy.readQuery<UserQuery>({
               query: USER_QUERY,
             });
 
@@ -73,7 +73,7 @@ const AddWorkspaceModal: React.FC<Props> = ({ isOpen, onClose }) => {
               return;
             }
 
-            proxy.writeQuery<UserQueryQuery>({
+            proxy.writeQuery<UserQuery>({
               query: USER_QUERY,
               data: {
                 user: {

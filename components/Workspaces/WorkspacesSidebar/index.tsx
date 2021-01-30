@@ -11,13 +11,13 @@ import {
 import { AddIcon } from '@chakra-ui/icons';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useUserQueryQuery } from 'generated/apolloComponents';
+import { useUserQuery } from 'generated/apolloComponents';
 
 import { SkeletonList } from '../../SkeletonList';
 import AddWorkspaceModal from '../AddWorkspaceModal';
 
 const WorkspacesSidebar: React.FC = () => {
-  const { data, loading } = useUserQueryQuery();
+  const { data, loading } = useUserQuery();
   const { query } = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const background = useColorModeValue('gray.200', 'gray.600');

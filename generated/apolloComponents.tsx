@@ -64,9 +64,9 @@ export type CreateWorkspaceMutation = { __typename?: 'Mutation' } & {
   >;
 };
 
-export type UserQueryQueryVariables = Exact<{ [key: string]: never }>;
+export type UserQueryVariables = Exact<{ [key: string]: never }>;
 
-export type UserQueryQuery = { __typename?: 'Query' } & {
+export type UserQuery = { __typename?: 'Query' } & {
   user: { __typename?: 'User' } & {
     workspaces: Array<
       { __typename?: 'Workspace' } & Pick<
@@ -128,8 +128,8 @@ export type CreateWorkspaceMutationOptions = Apollo.BaseMutationOptions<
   CreateWorkspaceMutation,
   CreateWorkspaceMutationVariables
 >;
-export const UserQueryDocument = gql`
-  query UserQuery {
+export const UserDocument = gql`
+  query User {
     user {
       workspaces {
         id
@@ -141,47 +141,36 @@ export const UserQueryDocument = gql`
 `;
 
 /**
- * __useUserQueryQuery__
+ * __useUserQuery__
  *
- * To run a query within a React component, call `useUserQueryQuery` and pass it any options that fit your needs.
- * When your component renders, `useUserQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useUserQueryQuery({
+ * const { data, loading, error } = useUserQuery({
  *   variables: {
  *   },
  * });
  */
-export function useUserQueryQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    UserQueryQuery,
-    UserQueryQueryVariables
-  >,
+export function useUserQuery(
+  baseOptions?: Apollo.QueryHookOptions<UserQuery, UserQueryVariables>,
 ) {
-  return Apollo.useQuery<UserQueryQuery, UserQueryQueryVariables>(
-    UserQueryDocument,
+  return Apollo.useQuery<UserQuery, UserQueryVariables>(
+    UserDocument,
     baseOptions,
   );
 }
-export function useUserQueryLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    UserQueryQuery,
-    UserQueryQueryVariables
-  >,
+export function useUserLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<UserQuery, UserQueryVariables>,
 ) {
-  return Apollo.useLazyQuery<UserQueryQuery, UserQueryQueryVariables>(
-    UserQueryDocument,
+  return Apollo.useLazyQuery<UserQuery, UserQueryVariables>(
+    UserDocument,
     baseOptions,
   );
 }
-export type UserQueryQueryHookResult = ReturnType<typeof useUserQueryQuery>;
-export type UserQueryLazyQueryHookResult = ReturnType<
-  typeof useUserQueryLazyQuery
->;
-export type UserQueryQueryResult = Apollo.QueryResult<
-  UserQueryQuery,
-  UserQueryQueryVariables
->;
+export type UserQueryHookResult = ReturnType<typeof useUserQuery>;
+export type UserLazyQueryHookResult = ReturnType<typeof useUserLazyQuery>;
+export type UserQueryResult = Apollo.QueryResult<UserQuery, UserQueryVariables>;
