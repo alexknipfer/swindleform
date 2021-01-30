@@ -23,7 +23,9 @@
       "@/config/*": ["config/*"],
       "@/hoc/*": ["hoc/*"],
       "@/db/*": ["db/*"],
-      "@/utils/*": ["utils/*"]
+      "@/utils/*": ["utils/*"],
+      "@/queries/*": ["queries/*"],
+      "@/mutations/*": ["mutations/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
