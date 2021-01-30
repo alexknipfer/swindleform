@@ -1,4 +1,5 @@
 import { GQLContext } from '@/apollo/interfaces';
+import { ApolloError } from 'apollo-server-micro';
 import { ObjectID } from 'mongodb';
 
 export const user = async (
@@ -13,6 +14,11 @@ export const user = async (
     },
   } = context;
   const user = await db.users.findOne({ _id: new ObjectID(id) as any });
+
+  if (!user) {
+    throw new ApolloError('Could not find user.', '404');
+  }
+
   const workspaces = (await db.workspaceRepo.getAll(user.workspaces)).map((w) =>
     w.snapshot(),
   );
