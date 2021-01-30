@@ -56,7 +56,11 @@ const WorkspaceHeading: React.FC<{
   }, [workspaceName, afterUpdateName]);
 
   return (
-    <Heading onClick={() => setIsEditingName(true)} as="h1">
+    <Heading
+      _hover={{ cursor: 'pointer' }}
+      onClick={() => setIsEditingName(true)}
+      as="h1"
+    >
       {isEditingName ? (
         <Input
           size="large"

@@ -11,7 +11,6 @@ export const updateWorkspace = async (
   context: GQLContext,
 ) => {
   const { db, session } = context;
-  console.log({ id, name });
   const workspace = await db.workspaceRepo.get(id);
 
   if (!workspace?.users.map(String).includes(session.user.id)) {
