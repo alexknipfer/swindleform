@@ -21,5 +21,5 @@ export const createWorkspace = async (
     { $push: { workspaces: workspace.id } },
   );
 
-  return workspace;
+  return workspace.snapshot();
 };

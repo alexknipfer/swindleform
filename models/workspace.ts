@@ -26,7 +26,7 @@ export class Workspace extends Entity<Workspace, WorkspaceSnapshot> {
    */
   init({
     id = uuid.v4(),
-    workspaceName = 'default',
+    workspaceName = 'Default Workspace',
     firstUserId,
   }: {
     id?: string;

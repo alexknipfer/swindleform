@@ -9,7 +9,7 @@ interface RepositoryOptions {
 }
 export declare class Repository<T extends Entity> extends EventEmitter {
   constructor(entityType: TConstructor<T>, options?: RepositoryOptions);
-  get(id: string, cb: (err: Error | null, entity: T) => void): void;
+  get(id: string, cb: (err: Error | null, entity: T | null) => void): void;
   getAll(ids: string[], cb: (err: Error | null, entities: T[]) => void): void;
   commit(entity: T, options: any, cb: (err: Error | null) => void): void;
   commit(entity: T, cb: (err: Error | null) => void): void;

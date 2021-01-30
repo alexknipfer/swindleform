@@ -7,4 +7,7 @@ export const workspace = gql`
   extend type Mutation {
     createWorkspace(name: String!): Workspace
   }
+  extend type Mutation {
+    updateWorkspace(id: ID!, name: String!): Workspace
+  }
 `;
