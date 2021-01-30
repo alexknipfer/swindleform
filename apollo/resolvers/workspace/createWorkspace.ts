@@ -17,7 +17,7 @@ export const createWorkspace = async (
   workspace.init({ workspaceName: name, firstUserId: session.user.id });
   await db.workspaceRepo.commit(workspace);
   await db.users.findOneAndUpdate(
-    { _id: new ObjectId(session.user.id) as any },
+    { _id: new ObjectId(session.user.id) },
     { $push: { workspaces: workspace.id } },
   );
 
