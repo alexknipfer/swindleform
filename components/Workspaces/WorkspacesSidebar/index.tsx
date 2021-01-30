@@ -10,15 +10,14 @@ import {
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import Link from 'next/link';
-import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
-import { UserQueryResponse, USER_QUERY } from '@/queries/userQuery';
+import { useUserQueryQuery } from 'generated/apolloComponents';
 
 import { SkeletonList } from '../../SkeletonList';
 import AddWorkspaceModal from '../AddWorkspaceModal';
 
 const WorkspacesSidebar: React.FC = () => {
-  const { data, loading } = useQuery<UserQueryResponse>(USER_QUERY);
+  const { data, loading } = useUserQueryQuery();
   const { query } = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const background = useColorModeValue('gray.200', 'gray.600');
@@ -48,7 +47,7 @@ const WorkspacesSidebar: React.FC = () => {
       {loading ? (
         <SkeletonList horizontalPadding={5} />
       ) : (
-        data.user.workspaces.map((w) => (
+        data?.user.workspaces.map((w) => (
           <Flex direction="column" key={w.id}>
             <Text
               background={
@@ -63,7 +62,6 @@ const WorkspacesSidebar: React.FC = () => {
                 {w.workspaceName}
               </CLink>
             </Text>
-            {w.formCount}
           </Flex>
         ))
       )}

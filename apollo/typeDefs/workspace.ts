@@ -5,6 +5,6 @@ export const workspace = gql`
     workspace(workspaceId: String!): Workspace
   }
   extend type Mutation {
-    createWorkspace(name: String!): Workspace
+    createWorkspace(name: String!): Workspace!
   }
 `;
