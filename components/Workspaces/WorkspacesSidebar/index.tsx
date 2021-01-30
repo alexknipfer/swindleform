@@ -46,7 +46,7 @@ const WorkspacesSidebar: React.FC = () => {
         ></IconButton>
       </HStack>
       {loading ? (
-        <SkeletonList />
+        <SkeletonList horizontalPadding={5} />
       ) : (
         data.user.workspaces.map((w) => (
           <Flex direction="column" key={w.id}>
