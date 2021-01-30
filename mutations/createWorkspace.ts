@@ -1,8 +1,13 @@
-import { UserWorkspace } from '@/models/user';
+import { WorkspaceSnapshot } from '@/models/workspace';
 import { gql } from '@apollo/client';
 
 export interface CreateWorkspaceMutationResponse {
-  createWorkspace: UserWorkspace & { __typename?: 'Workspace' };
+  createWorkspace: Pick<
+    WorkspaceSnapshot,
+    'id' | 'formCount' | 'users' | 'workspaceName'
+  > & {
+    __typename?: 'Workspace';
+  };
 }
 
 export const CREATE_WORKSPACE_MUTATION = gql`
