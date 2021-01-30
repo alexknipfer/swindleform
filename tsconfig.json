@@ -15,6 +15,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "noImplicitAny": true,
+    "strictNullChecks": true,
     "paths": {
       "@/components/*": ["components/*"],
       "@/layouts/*": ["layouts/*"],
