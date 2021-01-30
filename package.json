@@ -8,7 +8,9 @@
     "start": "next start",
     "prettier": "prettier --write \"**/*.{tsx,ts,css,md,js,html}\"",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "generate:watch": "yarn generate --watch",
+    "generate": "graphql-codegen --config codegen.yml"
   },
   "husky": {
     "hooks": {
@@ -49,6 +51,10 @@
     "mongodb": "^3.6.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.20.1",
+    "@graphql-codegen/typescript": "1.20.2",
+    "@graphql-codegen/typescript-operations": "^1.17.14",
+    "@graphql-codegen/typescript-react-apollo": "^2.2.1",
     "@types/bcryptjs": "^2.4.2",
     "@types/bluebird": "^3.5.33",
     "@types/mongodb": "^3.6.3",
