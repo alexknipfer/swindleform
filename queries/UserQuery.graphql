@@ -1,0 +1,9 @@
+query UserQuery {
+  user {
+    workspaces {
+      id
+      workspaceName
+      users
+    }
+  }
+}
