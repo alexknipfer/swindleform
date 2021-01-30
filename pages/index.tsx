@@ -1,9 +1,10 @@
 import withAuthentication from '@/hoc/withAuthentication';
-import { Spinner } from '@chakra-ui/react';
+import { Spinner, Flex } from '@chakra-ui/react';
 import { gql, useQuery } from '@apollo/client';
 import { WorkspaceSnapshot } from '@/models/workspace';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+
 const UserQuery = gql`
   query UserQuery {
     user {
@@ -13,6 +14,7 @@ const UserQuery = gql`
     }
   }
 `;
+
 const Workspaces: React.FC = () => {
   const router = useRouter();
 
@@ -28,7 +30,11 @@ const Workspaces: React.FC = () => {
     router.push('/workspaces/' + data.user.workspaces[0].id);
   }, [data, router]);
 
-  return <Spinner />;
+  return (
+    <Flex h="full" w="full" align="center" justify="center">
+      <Spinner size="lg" />
+    </Flex>
+  );
 };
 
 export default withAuthentication(Workspaces);
