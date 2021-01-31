@@ -1,0 +1,8 @@
+mutation updateWorkspace($name: String!, $id: ID!) {
+  updateWorkspace(name: $name, id: $id) {
+    id
+    workspaceName
+    users
+    formCount
+  }
+}

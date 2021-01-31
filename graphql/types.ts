@@ -30,9 +30,15 @@ export type Mutation = {
   __typename?: 'Mutation';
   root?: Maybe<Scalars['String']>;
   createWorkspace: Workspace;
+  updateWorkspace?: Maybe<Workspace>;
 };
 
 export type MutationCreateWorkspaceArgs = {
+  name: Scalars['String'];
+};
+
+export type MutationUpdateWorkspaceArgs = {
+  id: Scalars['ID'];
   name: Scalars['String'];
 };
 
