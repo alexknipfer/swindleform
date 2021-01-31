@@ -44,27 +44,22 @@ const WorkspacesSidebar: React.FC = () => {
           onClick={onOpen}
         ></IconButton>
       </HStack>
-      {loading ? (
-        <SkeletonList horizontalPadding={5} />
-      ) : (
-        data?.user.workspaces.map((w) => (
-          <Flex direction="column" key={w.id}>
-            <Text
-              background={
-                w.id === query.workspaceId ? 'blue.900' : 'transparent'
-              }
-              isTruncated
-              maxWidth="100%"
-              py={1}
-              px={5}
-            >
-              <CLink as={Link} href={`/workspaces/${w.id}`}>
-                {w.workspaceName}
-              </CLink>
-            </Text>
-          </Flex>
-        ))
-      )}
+      {loading && <SkeletonList horizontalPadding={5} />}
+      {data?.user.workspaces.map((w) => (
+        <Flex direction="column" key={w.id}>
+          <Text
+            background={w.id === query.workspaceId ? 'blue.900' : 'transparent'}
+            isTruncated
+            maxWidth="100%"
+            py={1}
+            px={5}
+          >
+            <CLink as={Link} href={`/workspaces/${w.id}`}>
+              {w.workspaceName}
+            </CLink>
+          </Text>
+        </Flex>
+      ))}
     </Box>
   );
 };

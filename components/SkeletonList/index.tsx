@@ -6,8 +6,8 @@ interface Props {
   horizontalPadding?: number;
 }
 
-const DEFAULT_ROWS = 3;
-const DEFAULT_ROW_HEIGHT = 8;
+const DEFAULT_ROWS = 10;
+const DEFAULT_ROW_HEIGHT = 5;
 const DEFAULT_HORIZONTAL_PADDING = 0;
 
 export const SkeletonList: React.FC<Props> = ({
