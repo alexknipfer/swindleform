@@ -40,6 +40,7 @@ const AddWorkspaceModal: React.FC<Props> = ({ isOpen, onClose }) => {
     values,
     isValid,
     isSubmitting,
+    resetForm,
     handleChange,
     handleSubmit,
   } = useFormik({
@@ -92,6 +93,7 @@ const AddWorkspaceModal: React.FC<Props> = ({ isOpen, onClose }) => {
         },
       });
       onClose();
+      resetForm();
 
       if (result.data) {
         router.push(`/workspaces/${result.data?.createWorkspace.id}`);
