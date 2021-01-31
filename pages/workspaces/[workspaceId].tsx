@@ -2,29 +2,13 @@ import { Heading } from '@chakra-ui/react';
 import WorkspacesLayout from '@/layouts/Workspaces';
 import withAuthentication from '@/hoc/withAuthentication';
 import { useRouter } from 'next/router';
-import { gql, useQuery } from '@apollo/client';
-import { WorkspaceSnapshot } from '@/models/workspace';
+import { useWorkspaceQuery } from '@/graphql/workspace/QueryWorkspace.generated';
 
-const WorkspaceQuery = gql`
-  query workspace($workspaceId: String!) {
-    workspace(workspaceId: $workspaceId) {
-      id
-      workspaceName
-      users
-      formCount
-    }
-  }
-`;
 const Workspaces: React.FC = () => {
   const router = useRouter();
   const workspaceId = router.query.workspaceId as string;
 
-  const { data } = useQuery<
-    {
-      workspace: WorkspaceSnapshot;
-    },
-    { workspaceId: string }
-  >(WorkspaceQuery, { variables: { workspaceId } });
+  const { data } = useWorkspaceQuery({ variables: { workspaceId } });
 
   console.log({ data });
 

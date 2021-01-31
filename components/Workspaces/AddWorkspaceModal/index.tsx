@@ -21,10 +21,6 @@ import USER_QUERY from '@/graphql/user/UserQuery.graphql';
 import { useRouter } from 'next/router';
 import { UserQuery } from '@/graphql/user/UserQuery.generated';
 import { useCreateWorkspaceMutation } from '@/graphql/workspace/CreateWorkspace.generated';
-// import {
-//   useCreateWorkspaceMutation,
-//   UserQuery,
-// } from 'generated/apolloComponents';
 
 interface Props {
   isOpen: boolean;
