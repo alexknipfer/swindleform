@@ -11,7 +11,6 @@ const WorkspaceHeading: React.FC<{
   const [isUpdating, setIsUpdating] = useState(false);
   const [newName, setNewName] = useState(workspaceName ? workspaceName : '');
   const [afterUpdateName, setAfterUpdateName] = useState('');
-
   const [mutate] = useUpdateWorkspaceMutation();
 
   const makeUpdate = async () => {
