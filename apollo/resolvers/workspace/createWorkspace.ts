@@ -9,10 +9,8 @@ interface Args {
 export const createWorkspace = async (
   _: Record<string, never>,
   { name }: Args,
-  context: GQLContext,
+  { db, session }: GQLContext,
 ) => {
-  const { db, session } = context;
-
   const workspace = new Workspace();
   workspace.init({ workspaceName: name, firstUserId: session.user.id });
   const commit = db.workspaceRepo.commit(workspace);

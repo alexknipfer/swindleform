@@ -46,7 +46,7 @@ const Login: NextPage<Props> = ({ token }) => {
         <form onSubmit={handleSubmit}>
           <input name="csrfToken" type="hidden" defaultValue={token} />
           <VStack spacing={4}>
-            <FormControl isInvalid={errors.email && touched.email}>
+            <FormControl isInvalid={!!errors.email && touched.email}>
               <FormLabel htmlFor="email">Email</FormLabel>
               <Input
                 type="email"

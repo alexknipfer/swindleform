@@ -3,7 +3,7 @@ import { Entity } from 'sourced';
 import { TConstructor } from 'sourced-repo-mongo';
 
 export interface AsyncRepo<T extends Entity> {
-  get: (id: string) => Promise<T>;
+  get: (id: string) => Promise<T | null>;
   getAll: (ids: string[]) => Promise<T[]>;
   commit: (entity: T, options?: any) => Promise<void>;
   commitAll: (entities: T[], options?: any) => Promise<void>;
@@ -14,8 +14,8 @@ export const makeRepoAsync = <T extends Entity>(
 ): AsyncRepo<T> => {
   const repo = new Repository(entity);
 
-  const get = (id: string): Promise<T> =>
-    new Promise<T>((resolve, reject) =>
+  const get = (id: string) =>
+    new Promise<T | null>((resolve, reject) =>
       repo.get(id, (err, entity) => {
         if (err) return reject(err);
         resolve(entity);

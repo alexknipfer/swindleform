@@ -1,9 +1,7 @@
-const isServer = !!process.browser;
-
 function loadServerEnvVar(key: string) {
   const value = process.env[key];
 
-  if (isServer && !value) {
+  if (!value) {
     throw new Error(`Environment variable ${key} is required on server`);
   }
 
