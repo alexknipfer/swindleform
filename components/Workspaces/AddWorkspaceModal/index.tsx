@@ -110,10 +110,11 @@ const AddWorkspaceModal: React.FC<Props> = ({ isOpen, onClose }) => {
       finalFocusRef={finalRef}
       isOpen={isOpen}
       onClose={onClose}
+      isCentered
     >
       <ModalOverlay />
       <form onSubmit={handleSubmit}>
-        <ModalContent>
+        <ModalContent mx={5}>
           <ModalHeader>Create Workspace</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
