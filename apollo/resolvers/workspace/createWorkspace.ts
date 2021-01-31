@@ -15,11 +15,13 @@ export const createWorkspace = async (
 
   const workspace = new Workspace();
   workspace.init({ workspaceName: name, firstUserId: session.user.id });
-  await db.workspaceRepo.commit(workspace);
-  await db.users.findOneAndUpdate(
+  const commit = db.workspaceRepo.commit(workspace);
+  const updateUser = db.users.findOneAndUpdate(
     { _id: new ObjectId(session.user.id) as any },
     { $push: { workspaces: workspace.id } },
   );
 
-  return workspace;
+  await Promise.all([commit, updateUser]);
+
+  return workspace.snapshot();
 };
