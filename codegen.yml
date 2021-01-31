@@ -1,8 +1,14 @@
 overwrite: true
 schema: 'http://localhost:3000/api/graphql'
-documents: ['mutations/**/*.graphql', 'queries/**/*.graphql']
+documents: 'graphql/**/*.graphql'
 generates:
-  generated/apolloComponents.tsx:
+  src/types.ts:
+    - typescript
+  src/:
+    preset: near-operation-file
+    presetConfig:
+      extension: .generated.tsx
+      baseTypesPath: types.ts
     plugins:
       - 'typescript'
       - 'typescript-operations'
