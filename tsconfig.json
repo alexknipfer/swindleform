@@ -23,7 +23,8 @@
       "@/config/*": ["config/*"],
       "@/hoc/*": ["hoc/*"],
       "@/db/*": ["db/*"],
-      "@/utils/*": ["utils/*"]
+      "@/utils/*": ["utils/*"],
+      "@/graphql/*": ["graphql/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

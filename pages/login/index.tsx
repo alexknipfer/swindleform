@@ -18,12 +18,19 @@ interface Props {
 }
 
 const Login: NextPage<Props> = ({ token }) => {
-  const { errors, touched, values, handleChange, handleSubmit } = useFormik({
+  const {
+    errors,
+    touched,
+    values,
+    isSubmitting,
+    handleChange,
+    handleSubmit,
+  } = useFormik({
     initialValues: {
       email: '',
     },
     onSubmit: async ({ email }) => {
-      signIn('email', { email });
+      await signIn('email', { email });
     },
   });
 
@@ -50,7 +57,13 @@ const Login: NextPage<Props> = ({ token }) => {
               />
               <FormErrorMessage>{errors.email}</FormErrorMessage>
             </FormControl>
-            <Button type="submit" w="full" mt={4}>
+            <Button
+              type="submit"
+              w="full"
+              mt={4}
+              isLoading={isSubmitting}
+              loadingText="Logging you in..."
+            >
               Log in to SwindleForm
             </Button>
           </VStack>
