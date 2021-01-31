@@ -61,7 +61,9 @@ const Nav: React.FC = () => {
       ) : (
         <Fragment>
           {session && (
-            <Text fontSize="sm">Signed in as: {session.user.email}</Text>
+            <Text display={['none', 'block']} fontSize="sm">
+              Signed in as: {session.user.email}
+            </Text>
           )}
           <ColorModeSwitch />
         </Fragment>
