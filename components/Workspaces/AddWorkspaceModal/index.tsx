@@ -17,12 +17,14 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import USER_QUERY from '@/queries/UserQuery.graphql';
+import USER_QUERY from '@/graphql/user/UserQuery.graphql';
 import { useRouter } from 'next/router';
-import {
-  useCreateWorkspaceMutation,
-  UserQuery,
-} from 'generated/apolloComponents';
+import { UserQuery } from '@/graphql/user/UserQuery.generated';
+import { useCreateWorkspaceMutation } from '@/graphql/workspace/CreateWorkspace.generated';
+// import {
+//   useCreateWorkspaceMutation,
+//   UserQuery,
+// } from 'generated/apolloComponents';
 
 interface Props {
   isOpen: boolean;

@@ -11,7 +11,7 @@ import {
 import { AddIcon } from '@chakra-ui/icons';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useUserQuery } from 'generated/apolloComponents';
+import { useUserQuery } from '@/graphql/user/UserQuery.generated';
 
 import { SkeletonList } from '../../SkeletonList';
 import AddWorkspaceModal from '../AddWorkspaceModal';
