@@ -18,7 +18,7 @@ export const appConfig = {
     user: loadServerEnvVar('EMAIL_SERVER_USER'),
     password: loadServerEnvVar('EMAIL_SERVER_PASSWORD'),
     serverHost: loadServerEnvVar('EMAIL_SERVER_HOST'),
-    serverPort: +loadServerEnvVar('EMAIL_SERVER_PORT'),
+    serverPort: Number(loadServerEnvVar('EMAIL_SERVER_PORT')),
     emailFrom: loadServerEnvVar('EMAIL_FROM'),
   },
 };

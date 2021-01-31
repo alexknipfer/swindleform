@@ -10,22 +10,21 @@ import {
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import Link from 'next/link';
-import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
-import { UserQueryResponse, USER_QUERY } from '@/queries/userQuery';
+import { useUserQuery } from '@/graphql/user/UserQuery.generated';
 
 import { SkeletonList } from '../../SkeletonList';
 import AddWorkspaceModal from '../AddWorkspaceModal';
 
 const WorkspacesSidebar: React.FC = () => {
-  const { data, loading } = useQuery<UserQueryResponse>(USER_QUERY);
+  const { data, loading } = useUserQuery();
   const { query } = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const background = useColorModeValue('gray.200', 'gray.600');
 
   return (
     <Box
-      w="256px"
+      w={['full', '256px']}
       borderRight="1px"
       borderRightColor={background}
       h="full"
@@ -45,28 +44,22 @@ const WorkspacesSidebar: React.FC = () => {
           onClick={onOpen}
         ></IconButton>
       </HStack>
-      {loading ? (
-        <SkeletonList horizontalPadding={5} />
-      ) : (
-        data.user.workspaces.map((w) => (
-          <Flex direction="column" key={w.id}>
-            <Text
-              background={
-                w.id === query.workspaceId ? 'blue.900' : 'transparent'
-              }
-              isTruncated
-              maxWidth="100%"
-              py={1}
-              px={5}
-            >
-              <CLink as={Link} href={`/workspaces/${w.id}`}>
-                {w.workspaceName}
-              </CLink>
-            </Text>
-            {w.formCount}
-          </Flex>
-        ))
-      )}
+      {loading && <SkeletonList horizontalPadding={5} />}
+      {data?.user.workspaces.map((w) => (
+        <Flex direction="column" key={w.id}>
+          <Text
+            background={w.id === query.workspaceId ? 'blue.900' : 'transparent'}
+            isTruncated
+            maxWidth="100%"
+            py={1}
+            px={5}
+          >
+            <CLink as={Link} href={`/workspaces/${w.id}`}>
+              {w.workspaceName}
+            </CLink>
+          </Text>
+        </Flex>
+      ))}
     </Box>
   );
 };

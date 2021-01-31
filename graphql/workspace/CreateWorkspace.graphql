@@ -1,0 +1,8 @@
+mutation CreateWorkspace($name: String!) {
+  createWorkspace(name: $name) {
+    id
+    workspaceName
+    formCount
+    users
+  }
+}

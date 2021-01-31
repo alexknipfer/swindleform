@@ -24,8 +24,7 @@
       "@/hoc/*": ["hoc/*"],
       "@/db/*": ["db/*"],
       "@/utils/*": ["utils/*"],
-      "@/queries/*": ["queries/*"],
-      "@/mutations/*": ["mutations/*"]
+      "@/graphql/*": ["graphql/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

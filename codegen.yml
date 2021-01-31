@@ -1,0 +1,18 @@
+overwrite: true
+schema: ${SCHEMA_PATH:http://localhost:3000/api/graphql}
+documents: 'graphql/**/*.graphql'
+generates:
+  graphql/types.ts:
+    - typescript
+  graphql/:
+    preset: near-operation-file
+    presetConfig:
+      extension: .generated.tsx
+      baseTypesPath: types.ts
+    plugins:
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+hooks:
+  afterAllFileWrite:
+    - prettier --write
+    - eslint --fix

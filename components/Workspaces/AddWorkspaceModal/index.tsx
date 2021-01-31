@@ -12,17 +12,15 @@ import {
   ModalFooter,
   Button,
 } from '@chakra-ui/react';
+import { FocusableElement } from '@chakra-ui/utils';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useRef } from 'react';
-import { useMutation } from '@apollo/client';
 import { v4 as uuidv4 } from 'uuid';
-import { UserQueryResponse, USER_QUERY } from '@/queries/userQuery';
-import {
-  CreateWorkspaceMutationResponse,
-  CREATE_WORKSPACE_MUTATION,
-} from '@/mutations/createWorkspace';
+import USER_QUERY from '@/graphql/user/UserQuery.graphql';
 import { useRouter } from 'next/router';
+import { UserQuery } from '@/graphql/user/UserQuery.generated';
+import { useCreateWorkspaceMutation } from '@/graphql/workspace/CreateWorkspace.generated';
 
 interface Props {
   isOpen: boolean;
@@ -34,9 +32,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const AddWorkspaceModal: React.FC<Props> = ({ isOpen, onClose }) => {
-  const [mutate] = useMutation<CreateWorkspaceMutationResponse>(
-    CREATE_WORKSPACE_MUTATION,
-  );
+  const [mutate] = useCreateWorkspaceMutation();
   const router = useRouter();
   const {
     errors,
@@ -44,6 +40,7 @@ const AddWorkspaceModal: React.FC<Props> = ({ isOpen, onClose }) => {
     values,
     isValid,
     isSubmitting,
+    resetForm,
     handleChange,
     handleSubmit,
   } = useFormik({
@@ -65,29 +62,47 @@ const AddWorkspaceModal: React.FC<Props> = ({ isOpen, onClose }) => {
             formCount: 0,
           },
         },
-        update: (proxy, { data: { createWorkspace } }) => {
-          const cache = proxy.readQuery<UserQueryResponse>({
-            query: USER_QUERY,
-          });
+        update: (proxy, { data }) => {
+          try {
+            const cachedUserData = proxy.readQuery<UserQuery>({
+              query: USER_QUERY,
+            });
 
-          proxy.writeQuery({
-            query: USER_QUERY,
-            data: {
-              user: {
-                ...cache.user,
-                workspaces: [...cache.user.workspaces, createWorkspace],
+            if (!cachedUserData || !data) {
+              return;
+            }
+
+            proxy.writeQuery<UserQuery>({
+              query: USER_QUERY,
+              data: {
+                user: {
+                  ...cachedUserData.user,
+                  workspaces: [
+                    ...cachedUserData.user.workspaces,
+                    data.createWorkspace,
+                  ],
+                },
               },
-            },
-          });
+            });
+          } catch (e) {
+            console.error(e);
+            onClose();
+
+            return;
+          }
         },
       });
       onClose();
-      router.push(`/workspaces/${result.data.createWorkspace.id}`);
+      resetForm();
+
+      if (result.data) {
+        router.push(`/workspaces/${result.data?.createWorkspace.id}`);
+      }
     },
   });
 
-  const initialRef = useRef();
-  const finalRef = useRef();
+  const initialRef = useRef<HTMLInputElement>(null);
+  const finalRef = useRef<FocusableElement>(null);
 
   return (
     <Modal
@@ -95,15 +110,16 @@ const AddWorkspaceModal: React.FC<Props> = ({ isOpen, onClose }) => {
       finalFocusRef={finalRef}
       isOpen={isOpen}
       onClose={onClose}
+      isCentered
     >
       <ModalOverlay />
       <form onSubmit={handleSubmit}>
-        <ModalContent>
+        <ModalContent mx={5}>
           <ModalHeader>Create Workspace</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl
-              isInvalid={errors.workspaceName && touched.workspaceName}
+              isInvalid={!!errors.workspaceName && touched.workspaceName}
             >
               <FormLabel htmlFor="workspaceName">Workspace Name</FormLabel>
               <Input

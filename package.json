@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS=--inspect next dev",
+    "dev": "concurrently \"NODE_OPTIONS=--inspect next dev\" \"yarn generate:watch\"",
     "build": "next build",
     "start": "next start",
     "prettier": "prettier --write \"**/*.{tsx,ts,css,md,js,html}\"",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "generate:watch": "yarn generate --watch",
+    "generate": "graphql-codegen --config codegen.yml -r dotenv/config"
   },
   "husky": {
     "hooks": {
@@ -49,6 +51,11 @@
     "mongodb": "^3.6.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.20.1",
+    "@graphql-codegen/near-operation-file-preset": "^1.17.13",
+    "@graphql-codegen/typescript": "1.20.2",
+    "@graphql-codegen/typescript-operations": "^1.17.14",
+    "@graphql-codegen/typescript-react-apollo": "^2.2.1",
     "@types/bcryptjs": "^2.4.2",
     "@types/bluebird": "^3.5.33",
     "@types/mongodb": "^3.6.3",
@@ -58,6 +65,7 @@
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.14.0",
     "@typescript-eslint/parser": "^4.14.0",
+    "concurrently": "^5.3.0",
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-import": "^2.22.1",

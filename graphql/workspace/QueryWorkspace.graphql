@@ -1,0 +1,8 @@
+query workspace($workspaceId: String!) {
+  workspace(workspaceId: $workspaceId) {
+    id
+    workspaceName
+    users
+    formCount
+  }
+}
