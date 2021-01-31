@@ -72,7 +72,6 @@ const WorkspaceHeading: React.FC<{
               return next;
             });
           }}
-          placeholder={workspaceName}
         />
       ) : loading ? (
         <Spinner />
