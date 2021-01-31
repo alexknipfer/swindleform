@@ -9,26 +9,10 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { Fragment } from 'react';
-import { gql } from '@apollo/client';
 import NextLink from 'next/link';
-import { initializeApollo } from '@/apollo/client';
 import { useSession } from 'next-auth/client';
 
 import ColorModeSwitch from '../ColorModeSwitch';
-
-const UserQuery = gql`
-  query UserQuery {
-    user {
-      id
-      email
-      workspaces {
-        id
-        workspaceName
-        users
-      }
-    }
-  }
-`;
 
 const Nav: React.FC = () => {
   const [session, loading] = useSession();
@@ -71,19 +55,5 @@ const Nav: React.FC = () => {
     </Flex>
   );
 };
-
-export async function getServerProps() {
-  const apolloClient = initializeApollo();
-
-  await apolloClient.query({
-    query: UserQuery,
-  });
-
-  return {
-    props: {
-      initialApolloState: apolloClient.cache.extract(),
-    },
-  };
-}
 
 export default Nav;
