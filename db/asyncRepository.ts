@@ -1,6 +1,6 @@
-import { Repository } from '@types/sourced-repo-mongo';
+import { Repository } from 'sourced-repo-mongo';
 import { Entity } from 'sourced';
-import { TConstructor } from '@types/sourced-repo-mongo';
+import { TConstructor } from 'sourced-repo-mongo';
 
 export interface AsyncRepo<T extends Entity> {
   get: (id: string) => Promise<T>;
