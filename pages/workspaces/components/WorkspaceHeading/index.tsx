@@ -28,6 +28,7 @@ const WorkspaceHeading: React.FC<{
   }, [workspaceName]);
 
   // this is to clear the afterUpdateName once the workspaceName has been refetched
+  // and to clear the updating loading state
   useEffect(() => {
     if (workspaceName && afterUpdateName && workspaceName === afterUpdateName) {
       setAfterUpdateName('');
