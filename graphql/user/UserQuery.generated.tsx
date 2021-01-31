@@ -1,7 +1,7 @@
-import * as Types from '../types';
-
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
+
+import * as Types from '../types';
 export type UserQueryVariables = Types.Exact<{ [key: string]: never }>;
 
 export type UserQuery = { __typename?: 'Query' } & {
