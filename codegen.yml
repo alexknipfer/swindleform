@@ -1,10 +1,10 @@
 overwrite: true
-schema: 'http://localhost:3000/api/graphql'
+schema: ${SCHEMA_PATH:http://localhost:3000/api/graphql}
 documents: 'graphql/**/*.graphql'
 generates:
-  src/types.ts:
+  graphql/types.ts:
     - typescript
-  src/:
+  graphql/:
     preset: near-operation-file
     presetConfig:
       extension: .generated.tsx
