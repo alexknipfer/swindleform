@@ -5,14 +5,13 @@ import { ObjectID } from 'mongodb';
 export const user = async (
   _: Record<string, never>,
   args: Record<string, never>,
-  context: GQLContext,
-) => {
-  const {
+  {
     db,
     session: {
       user: { id },
     },
-  } = context;
+  }: GQLContext,
+) => {
   const user = await db.users.findOne({ _id: new ObjectID(id) });
 
   if (!user) {
