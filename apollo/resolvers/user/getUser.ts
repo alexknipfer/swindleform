@@ -13,7 +13,7 @@ export const user = async (
       user: { id },
     },
   } = context;
-  const user = await db.users.findOne({ _id: new ObjectID(id) as any });
+  const user = await db.users.findOne({ _id: new ObjectID(id) });
 
   if (!user) {
     throw new ApolloError('Could not find user.', '404');
