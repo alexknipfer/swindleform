@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "yarn generate",
-    "dev": "NODE_OPTIONS=--inspect next dev",
+    "dev": "concurrently \"NODE_OPTIONS=--inspect next dev\" \"yarn generate:watch\"",
     "build": "next build",
     "start": "next start",
     "prettier": "prettier --write \"**/*.{tsx,ts,css,md,js,html}\"",
@@ -66,6 +65,7 @@
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.14.0",
     "@typescript-eslint/parser": "^4.14.0",
+    "concurrently": "^5.3.0",
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-import": "^2.22.1",
