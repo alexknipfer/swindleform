@@ -12,3 +12,7 @@ generates:
     plugins:
       - 'typescript-operations'
       - 'typescript-react-apollo'
+hooks:
+  afterAllFileWrite:
+    - prettier --write
+    - eslint --fix
