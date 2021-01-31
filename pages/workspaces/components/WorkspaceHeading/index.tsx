@@ -8,7 +8,6 @@ const WorkspaceHeading: React.FC<{
   loading: boolean;
 }> = ({ workspaceName, workspaceId, loading }) => {
   const [isEditingName, setIsEditingName] = useState(false);
-  const [isUpdating, setIsUpdating] = useState(false);
   const [newName, setNewName] = useState(workspaceName ? workspaceName : '');
   const [afterUpdateName, setAfterUpdateName] = useState('');
   const [mutate] = useUpdateWorkspaceMutation();
@@ -32,7 +31,6 @@ const WorkspaceHeading: React.FC<{
   useEffect(() => {
     if (workspaceName && afterUpdateName && workspaceName === afterUpdateName) {
       setAfterUpdateName('');
-      setIsUpdating(false);
     }
   }, [workspaceName, afterUpdateName]);
 
@@ -69,7 +67,6 @@ const WorkspaceHeading: React.FC<{
 
               setIsEditingName(false);
               setAfterUpdateName(next);
-              setIsUpdating(true);
               makeUpdate();
 
               return next;
@@ -77,12 +74,10 @@ const WorkspaceHeading: React.FC<{
           }}
           placeholder={workspaceName}
         />
-      ) : // this handles when update is sent over network but isn't refetched yet
-      // aka my hacky version of optimistic UI
-      loading || isUpdating ? (
+      ) : loading ? (
         <Spinner />
       ) : (
-        workspaceName || 'Manage Workspaces'
+        afterUpdateName || workspaceName || 'Manage Workspaces'
       )}
     </Heading>
   );
