@@ -7,11 +7,9 @@ export type WorkspaceQueryVariables = Types.Exact<{
 }>;
 
 export type WorkspaceQuery = { __typename?: 'Query' } & {
-  workspace?: Types.Maybe<
-    { __typename?: 'Workspace' } & Pick<
-      Types.Workspace,
-      'id' | 'workspaceName' | 'users' | 'formCount'
-    >
+  workspace: { __typename?: 'Workspace' } & Pick<
+    Types.Workspace,
+    'id' | 'workspaceName' | 'users' | 'formCount'
   >;
 };
 

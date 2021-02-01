@@ -48,7 +48,7 @@ const WorkspacesSidebar: React.FC = () => {
       {data?.user.workspaces.map((w) => (
         <Flex direction="column" key={w.id}>
           <Text
-            background={w.id === query.workspaceId ? 'blue.900' : 'transparent'}
+            background={w.id === query.workspaceId ? background : 'transparent'}
             isTruncated
             maxWidth="100%"
             py={1}
