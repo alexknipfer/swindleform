@@ -2,7 +2,7 @@ import { gql } from 'apollo-server-micro';
 
 export const workspace = gql`
   extend type Query {
-    workspace(workspaceId: String!): Workspace
+    workspace(workspaceId: String!): Workspace!
   }
 
   extend type Mutation {
@@ -10,6 +10,6 @@ export const workspace = gql`
   }
 
   extend type Mutation {
-    updateWorkspace(id: ID!, name: String!): Workspace
+    updateWorkspace(id: ID!, name: String!): Workspace!
   }
 `;

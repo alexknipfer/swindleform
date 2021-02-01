@@ -19,7 +19,7 @@ export type Query = {
   __typename?: 'Query';
   root?: Maybe<Scalars['String']>;
   user: User;
-  workspace?: Maybe<Workspace>;
+  workspace: Workspace;
 };
 
 export type QueryWorkspaceArgs = {
@@ -30,7 +30,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   root?: Maybe<Scalars['String']>;
   createWorkspace: Workspace;
-  updateWorkspace?: Maybe<Workspace>;
+  updateWorkspace: Workspace;
 };
 
 export type MutationCreateWorkspaceArgs = {

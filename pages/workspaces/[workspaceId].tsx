@@ -14,7 +14,7 @@ const Workspaces: React.FC = () => {
   return (
     <WorkspacesLayout>
       <WorkspaceHeading
-        workspaceName={data?.workspace?.workspaceName}
+        workspaceName={data?.workspace.workspaceName}
         workspaceId={workspaceId}
         loading={loading}
       />

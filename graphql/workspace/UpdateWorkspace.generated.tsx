@@ -8,11 +8,9 @@ export type UpdateWorkspaceMutationVariables = Types.Exact<{
 }>;
 
 export type UpdateWorkspaceMutation = { __typename?: 'Mutation' } & {
-  updateWorkspace?: Types.Maybe<
-    { __typename?: 'Workspace' } & Pick<
-      Types.Workspace,
-      'id' | 'workspaceName' | 'users' | 'formCount'
-    >
+  updateWorkspace: { __typename?: 'Workspace' } & Pick<
+    Types.Workspace,
+    'id' | 'workspaceName' | 'users' | 'formCount'
   >;
 };
 

@@ -1,4 +1,5 @@
 import { GQLContext } from '@/apollo/interfaces';
+import { ApolloError } from 'apollo-server-micro';
 
 export const workspace = async (
   _: Record<string, never>,
@@ -15,7 +16,7 @@ export const workspace = async (
   const workspace = await db.workspaceRepo.get(workspaceId);
 
   if (!workspace || !workspace.users.map(String).includes(userId)) {
-    return null;
+    throw new ApolloError('Workspace not found', '404');
   }
 
   return workspace.snapshot();
