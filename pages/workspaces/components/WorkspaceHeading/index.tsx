@@ -1,12 +1,12 @@
 import { useUpdateWorkspaceMutation } from '@/graphql/workspace/UpdateWorkspace.generated';
-import { Heading, Spinner, Input } from '@chakra-ui/react';
+import { Input } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 const WorkspaceHeading: React.FC<{
   workspaceName?: string;
   workspaceId: string;
   loading: boolean;
-}> = ({ workspaceName, workspaceId, loading }) => {
+}> = ({ workspaceName, workspaceId }) => {
   const [isEditingName, setIsEditingName] = useState(false);
   const [newName, setNewName] = useState(workspaceName ? workspaceName : '');
   const [afterUpdateName, setAfterUpdateName] = useState('');
@@ -34,51 +34,42 @@ const WorkspaceHeading: React.FC<{
     }
   }, [workspaceName, afterUpdateName]);
 
+  const saveUpdate = (el: HTMLInputElement, enterPressed = false) => {
+    setNewName((prev) => {
+      const nextValue = el.value;
+
+      if (!nextValue) {
+        return prev;
+      }
+
+      setIsEditingName(false);
+      setAfterUpdateName(nextValue);
+      makeUpdate();
+
+      if (enterPressed) {
+        el.blur();
+      }
+
+      return nextValue;
+    });
+  };
+
   return (
-    <Heading
-      _hover={{ cursor: 'pointer' }}
-      onClick={() => setIsEditingName(true)}
-      as="h1"
-    >
-      {isEditingName ? (
-        <Input
-          size="large"
-          fontWeight="bold"
-          value={newName}
-          autoFocus
-          onFocus={(e) => {
-            const el = e.target;
-            el.setSelectionRange(0, el.value.length);
-          }}
-          onChange={(e) => setNewName(e.target.value)}
-          onBlur={(e) => {
-            /**
-             * update UI logic
-             * setIsEditing changes H1 to an input
-             * afterUpdateName is to maintain new name until it's refetched
-             * makeUpdate triggers the mutation with the latest input data
-             */
-            setNewName((prev) => {
-              const next = e.target.value;
-
-              if (!next) {
-                return prev;
-              }
-
-              setIsEditingName(false);
-              setAfterUpdateName(next);
-              makeUpdate();
-
-              return next;
-            });
-          }}
-        />
-      ) : loading ? (
-        <Spinner />
-      ) : (
-        afterUpdateName || workspaceName || 'Manage Workspaces'
-      )}
-    </Heading>
+    <Input
+      size="lg"
+      variant={isEditingName ? 'flushed' : 'unstyled'}
+      fontWeight="bold"
+      fontSize={32}
+      value={newName}
+      onFocus={(e) => {
+        const el = e.target;
+        el.setSelectionRange(0, el.value.length);
+        setIsEditingName(true);
+      }}
+      onChange={(e) => setNewName(e.target.value)}
+      onBlur={(e) => saveUpdate(e.target)}
+      onKeyPress={(e) => e.key === 'Enter' && saveUpdate(e.currentTarget, true)}
+    />
   );
 };
 
