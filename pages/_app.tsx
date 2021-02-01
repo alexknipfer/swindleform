@@ -10,9 +10,9 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   const apolloClient = useApollo(pageProps.initialApolloState);
 
   return (
-    <ApolloProvider client={apolloClient}>
-      <Provider session={pageProps.session}>
-        <ChakraProvider>
+    <ChakraProvider>
+      <ApolloProvider client={apolloClient}>
+        <Provider session={pageProps.session}>
           <CSSReset />
           <Head>
             <meta
@@ -22,9 +22,9 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
           </Head>
           <GlobalStyle />
           <Component {...pageProps} />
-        </ChakraProvider>
-      </Provider>
-    </ApolloProvider>
+        </Provider>
+      </ApolloProvider>
+    </ChakraProvider>
   );
 };
 
