@@ -1,5 +1,5 @@
 import { useUpdateWorkspaceMutation } from '@/graphql/workspace/UpdateWorkspace.generated';
-import { Input } from '@chakra-ui/react';
+import { Input, useColorModeValue } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 const WorkspaceHeading: React.FC<{
@@ -7,6 +7,7 @@ const WorkspaceHeading: React.FC<{
   workspaceId: string;
   loading: boolean;
 }> = ({ workspaceName, workspaceId }) => {
+  const background = useColorModeValue('gray.200', 'gray.600');
   const [isEditingName, setIsEditingName] = useState(false);
   const [newName, setNewName] = useState(workspaceName ? workspaceName : '');
   const [afterUpdateName, setAfterUpdateName] = useState('');
@@ -57,8 +58,8 @@ const WorkspaceHeading: React.FC<{
   return (
     <Input
       size="lg"
-      textAlign="center"
-      _hover={{ background: 'blue.900' }}
+      paddingLeft="1rem"
+      _hover={{ background }}
       variant={isEditingName ? 'flushed' : 'unstyled'}
       fontWeight="bold"
       fontSize={32}
