@@ -57,6 +57,8 @@ const WorkspaceHeading: React.FC<{
   return (
     <Input
       size="lg"
+      textAlign="center"
+      _hover={{ background: 'blue.900' }}
       variant={isEditingName ? 'flushed' : 'unstyled'}
       fontWeight="bold"
       fontSize={32}
