@@ -1,4 +1,5 @@
 import { GQLContext } from '@/apollo/interfaces';
+import { ApolloError } from 'apollo-server-micro';
 
 interface Args {
   id: string;
@@ -14,7 +15,7 @@ export const updateWorkspace = async (
   const workspace = await db.workspaceRepo.get(id);
 
   if (!workspace?.users.map(String).includes(session.user.id)) {
-    return null;
+    throw new ApolloError('Workspace not found', '404');
   }
 
   workspace.updateName({ name });
