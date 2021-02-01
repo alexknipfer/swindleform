@@ -3,9 +3,40 @@ import {
   ApolloClient,
   InMemoryCache,
   NormalizedCacheObject,
+  from,
 } from '@apollo/client';
+import { createStandaloneToast } from '@chakra-ui/react';
+import { onError } from '@apollo/client/link/error';
+import { theme } from '@/utils/theme';
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;
+
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  const toast = createStandaloneToast({ theme });
+
+  if (graphQLErrors) {
+    graphQLErrors.map(({ message }) =>
+      toast({
+        title: message,
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'top',
+      }),
+    );
+  }
+
+  if (networkError) {
+    toast({
+      title: 'Network Error',
+      description: networkError,
+      status: 'error',
+      duration: 5000,
+      isClosable: true,
+      position: 'top',
+    });
+  }
+});
 
 const createIsomorphLink = () => {
   if (typeof window === 'undefined') {
@@ -26,7 +57,7 @@ const createIsomorphLink = () => {
 const createApolloClient = () => {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: createIsomorphLink(),
+    link: from([errorLink, createIsomorphLink()]),
     cache: new InMemoryCache(),
   });
 };
