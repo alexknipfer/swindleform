@@ -15,6 +15,7 @@ export class Workspace extends Entity<Workspace, WorkspaceSnapshot> {
   workspaceName = '';
   formCount = 0;
   forms: Form[] = [];
+  createdAt = '';
 
   constructor(snapshot?: any, events?: any[]) {
     super();
@@ -39,6 +40,7 @@ export class Workspace extends Entity<Workspace, WorkspaceSnapshot> {
     this.id = id;
     this.workspaceName = workspaceName;
     this.users = [firstUserId];
+    this.createdAt = new Date().toISOString();
 
     this.digest('init', { id, workspaceName, firstUserId });
   }
