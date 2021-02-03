@@ -10,7 +10,9 @@ export type WorkspaceQuery = { __typename?: 'Query' } & {
   workspace: { __typename?: 'Workspace' } & Pick<
     Types.Workspace,
     'id' | 'workspaceName' | 'users' | 'formCount'
-  >;
+  > & {
+      forms: Array<{ __typename?: 'Form' } & Pick<Types.Form, 'id' | 'name'>>;
+    };
 };
 
 export const WorkspaceDocument = gql`
@@ -20,6 +22,10 @@ export const WorkspaceDocument = gql`
       workspaceName
       users
       formCount
+      forms {
+        id
+        name
+      }
     }
   }
 `;

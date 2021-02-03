@@ -31,6 +31,7 @@ export type Mutation = {
   root?: Maybe<Scalars['String']>;
   createWorkspace: Workspace;
   updateWorkspace: Workspace;
+  createForm: Workspace;
 };
 
 export type MutationCreateWorkspaceArgs = {
@@ -42,12 +43,8 @@ export type MutationUpdateWorkspaceArgs = {
   name: Scalars['String'];
 };
 
-export type Workspace = {
-  __typename?: 'Workspace';
-  id: Scalars['ID'];
-  users: Array<Scalars['String']>;
-  workspaceName: Scalars['String'];
-  formCount: Scalars['Int'];
+export type MutationCreateFormArgs = {
+  workspaceId: Scalars['String'];
 };
 
 export type User = {
@@ -55,4 +52,19 @@ export type User = {
   id: Scalars['ID'];
   email: Scalars['String'];
   workspaces: Array<Workspace>;
+};
+
+export type Workspace = {
+  __typename?: 'Workspace';
+  id: Scalars['ID'];
+  users: Array<Scalars['String']>;
+  workspaceName: Scalars['String'];
+  formCount: Scalars['Int'];
+  forms: Array<Form>;
+};
+
+export type Form = {
+  __typename?: 'Form';
+  id: Scalars['ID'];
+  name: Scalars['String'];
 };

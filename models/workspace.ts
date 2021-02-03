@@ -1,6 +1,8 @@
 import { Entity, SnapshotBase } from 'sourced';
 import * as uuid from 'uuid';
 
+import { Form } from './form';
+
 export interface WorkspaceSnapshot extends SnapshotBase {
   users: string[];
   workspaceName: string;
@@ -12,6 +14,8 @@ export class Workspace extends Entity<Workspace, WorkspaceSnapshot> {
   users: string[] = [];
   workspaceName = '';
   formCount = 0;
+  forms: Form[] = [];
+  createdAt = '';
 
   constructor(snapshot?: any, events?: any[]) {
     super();
@@ -36,6 +40,7 @@ export class Workspace extends Entity<Workspace, WorkspaceSnapshot> {
     this.id = id;
     this.workspaceName = workspaceName;
     this.users = [firstUserId];
+    this.createdAt = new Date().toISOString();
 
     this.digest('init', { id, workspaceName, firstUserId });
   }
@@ -48,5 +53,10 @@ export class Workspace extends Entity<Workspace, WorkspaceSnapshot> {
   addUser(params: { userId: string }) {
     this.users.push(params.userId);
     this.digest('addUser', params);
+  }
+
+  createForm(form: Form) {
+    this.forms.push(form);
+    this.digest('createForm', form);
   }
 }
