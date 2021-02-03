@@ -4,5 +4,9 @@ query workspace($workspaceId: String!) {
     workspaceName
     users
     formCount
+    forms {
+      id
+      name
+    }
   }
 }
