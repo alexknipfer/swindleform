@@ -17,8 +17,7 @@ export const createForm = async (
     throw new ApolloError('Workspace not found', '404');
   }
 
-  const form = new Form();
-  workspace.createForm(form);
+  workspace.createForm(new Form());
   await db.workspaceRepo.commit(workspace);
 
   return workspace.snapshot();
