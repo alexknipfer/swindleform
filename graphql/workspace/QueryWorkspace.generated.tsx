@@ -7,14 +7,12 @@ export type WorkspaceQueryVariables = Types.Exact<{
 }>;
 
 export type WorkspaceQuery = { __typename?: 'Query' } & {
-  workspace?: Types.Maybe<
-    { __typename?: 'Workspace' } & Pick<
-      Types.Workspace,
-      'id' | 'workspaceName' | 'users' | 'formCount'
-    > & {
-        forms: Array<{ __typename?: 'Form' } & Pick<Types.Form, 'id' | 'name'>>;
-      }
-  >;
+  workspace: { __typename?: 'Workspace' } & Pick<
+    Types.Workspace,
+    'id' | 'workspaceName' | 'users' | 'formCount'
+  > & {
+      forms: Array<{ __typename?: 'Form' } & Pick<Types.Form, 'id' | 'name'>>;
+    };
 };
 
 export const WorkspaceDocument = gql`
