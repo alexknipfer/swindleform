@@ -31,6 +31,7 @@ export type Mutation = {
   root?: Maybe<Scalars['String']>;
   createWorkspace: Workspace;
   updateWorkspace: Workspace;
+  createQuestion: Workspace;
   createForm: Workspace;
 };
 
@@ -41,6 +42,12 @@ export type MutationCreateWorkspaceArgs = {
 export type MutationUpdateWorkspaceArgs = {
   id: Scalars['ID'];
   name: Scalars['String'];
+};
+
+export type MutationCreateQuestionArgs = {
+  workspaceId: Scalars['String'];
+  formId: Scalars['String'];
+  question: QuestionCreateParams;
 };
 
 export type MutationCreateFormArgs = {
@@ -67,4 +74,30 @@ export type Form = {
   __typename?: 'Form';
   id: Scalars['ID'];
   name: Scalars['String'];
+  questions: Array<Maybe<Question>>;
+};
+
+export type QuestionData = {
+  __typename?: 'QuestionData';
+  question: Scalars['String'];
+  required: Scalars['Boolean'];
+  type: QuestionType;
+};
+
+export type Question = {
+  __typename?: 'Question';
+  id: Scalars['ID'];
+  type: QuestionType;
+  data: QuestionData;
+  createdAt: Scalars['String'];
+};
+
+export enum QuestionType {
+  Text = 'text',
+}
+
+export type QuestionCreateParams = {
+  question: Scalars['String'];
+  required: Scalars['Boolean'];
+  type: QuestionType;
 };

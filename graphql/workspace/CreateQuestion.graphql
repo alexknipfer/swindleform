@@ -1,0 +1,21 @@
+mutation createQuestion($workspaceId:String!, $formId:String!, $question:QuestionCreateParams!) {
+  createQuestion(workspaceId:$workspaceId, formId:$formId, question:$question){
+    workspaceName
+    id
+    users
+    formCount
+    forms {
+      id
+      name
+      questions {
+        id
+        type
+        createdAt
+        data {
+          question
+          type
+        }
+      }
+    }
+  }
+}
