@@ -23,7 +23,7 @@ const WorkspacesSidebar: React.FC = () => {
 
   return (
     <Box
-      w={['full', 'full', '256px']}
+      w={['full', null, null, '256px']}
       borderRight="1px"
       borderRightColor={background}
       h="full"
