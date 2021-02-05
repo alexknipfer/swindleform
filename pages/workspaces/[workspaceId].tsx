@@ -1,5 +1,6 @@
 import WorkspacesLayout from '@/layouts/Workspaces';
 import withAuthentication from '@/hoc/withAuthentication';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useWorkspaceQuery } from '@/graphql/workspace/QueryWorkspace.generated';
 import { Skeleton } from '@chakra-ui/react';
@@ -7,6 +8,7 @@ import { Skeleton } from '@chakra-ui/react';
 import WorkspaceHeading from './components/WorkspaceHeading';
 import WorkspaceGrid from './components/WorkspaceGrid';
 import CreateFormButton from './components/CreateFormButton';
+import FormCard from './components/FormCard';
 
 const Workspaces: React.FC = () => {
   const router = useRouter();
@@ -26,6 +28,13 @@ const Workspaces: React.FC = () => {
           Array(5)
             .fill(0)
             .map((_, index) => <Skeleton h={40} key={index} />)}
+        {data?.workspace.forms.map(({ name, id }, index) => (
+          <Link key={`${name}-${index}`} href={`/form/${id}/create`}>
+            <a>
+              <FormCard name={name} />
+            </a>
+          </Link>
+        ))}
       </WorkspaceGrid>
     </WorkspacesLayout>
   );
