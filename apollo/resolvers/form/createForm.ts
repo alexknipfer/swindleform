@@ -17,8 +17,9 @@ export const createForm = async (
     userId: session.user.id,
   });
 
-  workspace.createForm(new Form());
+  const form = new Form();
+  workspace.createForm(form);
   await db.workspaceRepo.commit(workspace);
 
-  return workspace.snapshot();
+  return form;
 };

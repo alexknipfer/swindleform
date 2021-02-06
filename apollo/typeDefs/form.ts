@@ -39,6 +39,6 @@ export const form = gql`
   }
 
   extend type Mutation {
-    createForm(workspaceId: String!): Workspace!
+    createForm(workspaceId: String!): Form!
   }
 `;

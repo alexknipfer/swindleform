@@ -32,7 +32,7 @@ export type Mutation = {
   createWorkspace: Workspace;
   updateWorkspace: Workspace;
   createQuestion: Workspace;
-  createForm: Workspace;
+  createForm: Form;
 };
 
 export type MutationCreateWorkspaceArgs = {
