@@ -1,0 +1,6 @@
+mutation CreateForm($workspaceId: String!) {
+  createForm(workspaceId: $workspaceId) {
+    id
+    name
+  }
+}

@@ -12,9 +12,8 @@ import { AddIcon } from '@chakra-ui/icons';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useUserQuery } from '@/graphql/user/UserQuery.generated';
-
-import { SkeletonList } from '../../SkeletonList';
-import AddWorkspaceModal from '../AddWorkspaceModal';
+import { SkeletonList } from '@/components/SkeletonList';
+import AddWorkspaceModal from '@/layouts/components/AddWorkspaceModal';
 
 const WorkspacesSidebar: React.FC = () => {
   const { data, loading } = useUserQuery();
@@ -24,7 +23,7 @@ const WorkspacesSidebar: React.FC = () => {
 
   return (
     <Box
-      w={['full', '256px']}
+      w={['full', null, null, '256px']}
       borderRight="1px"
       borderRightColor={background}
       h="full"

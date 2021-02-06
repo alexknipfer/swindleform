@@ -31,7 +31,7 @@ export type Mutation = {
   root?: Maybe<Scalars['String']>;
   createWorkspace: Workspace;
   updateWorkspace: Workspace;
-  createForm: Workspace;
+  createForm: Form;
 };
 
 export type MutationCreateWorkspaceArgs = {

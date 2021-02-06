@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import Nav from '@/components/Nav';
-import WorkspacesSidebar from '@/components/Workspaces/WorkspacesSidebar';
+import WorkspacesSidebar from '@/layouts/components/WorkspacesSidebar';
 
 const WorkspacesLayout: React.FC = ({ children }) => {
   const background = useColorModeValue('gray.200', 'gray.600');
@@ -23,7 +23,7 @@ const WorkspacesLayout: React.FC = ({ children }) => {
     <Flex direction="column" h="100%">
       <Nav />
       <HStack
-        display={['flex', 'none']}
+        display={['flex', null, null, 'none']}
         px={5}
         h="64px"
         borderBottom="1px"
@@ -51,10 +51,10 @@ const WorkspacesLayout: React.FC = ({ children }) => {
             </DrawerContent>
           </DrawerOverlay>
         </Drawer>
-        <Box display={['none', 'block']}>
+        <Box display={['none', null, null, 'block']}>
           <WorkspacesSidebar />
         </Box>
-        <Box h="100%" pt={5} px={5}>
+        <Box h="full" w="full" pt={5} px={5}>
           {children}
         </Box>
       </Flex>
