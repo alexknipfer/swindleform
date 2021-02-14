@@ -6,13 +6,6 @@ export enum QuestionType {
 
 export type QuestionData = TextQuestionData;
 
-interface QuestionBase {
-  id: string;
-  type: QuestionType;
-  data: QuestionData;
-  createdAt: string;
-}
-
 export interface BaseQuestionData {
   question: string;
   required: boolean;
@@ -32,10 +25,29 @@ export interface FormQuestion {
 
 export type QuestionCreateParams = TextQuestionData;
 
-export class TextQuestion implements QuestionBase {
+interface IQuestion {
+  id: string;
+  type: QuestionType;
+  data: QuestionData;
+  createdAt: string;
+}
+
+class QuestionBase {
+  id: string;
+  createdAt: string;
+
+  constructor() {
+    this.id = uuid.v4();
+    this.createdAt = new Date().toISOString();
+  }
+}
+
+export class TextQuestion extends QuestionBase implements IQuestion {
   type = QuestionType.TEXT;
   id = uuid.v4();
   createdAt = new Date().toISOString();
 
-  constructor(public data: TextQuestionData) {}
+  constructor(public data: TextQuestionData) {
+    super();
+  }
 }
