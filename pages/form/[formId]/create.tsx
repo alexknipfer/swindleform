@@ -2,9 +2,8 @@ import { Flex } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import { useState } from 'react';
 import FormEditorLayout from '@/layouts/FormEditor';
-
-import Toolbar, { ToolType } from './components/Toolbar';
-import QuestionBuilder from './components/QuestionBuilder';
+import Toolbar, { ToolType } from '@/components/FormEditorToolbar';
+import QuestionBuilder from '@/components/QuestionBuilder';
 
 const CreateForm: NextPage = () => {
   const [selectedTool, setSelectedTool] = useState(ToolType.BUILDER);
