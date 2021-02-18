@@ -1,14 +1,20 @@
-import WorkspacesLayout from '@/layouts/Workspaces';
+import { Flex } from '@chakra-ui/react';
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
+import { useState } from 'react';
+import FormEditorLayout from '@/layouts/FormEditor';
+import Toolbar, { ToolType } from '@/components/FormEditorToolbar';
+import QuestionBuilder from '@/components/QuestionBuilder';
 
 const CreateForm: NextPage = () => {
-  const { query } = useRouter();
+  const [selectedTool, setSelectedTool] = useState(ToolType.BUILDER);
 
   return (
-    <WorkspacesLayout>
-      <h3>Create form for: {query.formId} </h3>
-    </WorkspacesLayout>
+    <FormEditorLayout>
+      <Flex h="full">
+        <Toolbar selectedTool={selectedTool} onToolSelect={setSelectedTool} />
+        {selectedTool === ToolType.BUILDER && <QuestionBuilder />}
+      </Flex>
+    </FormEditorLayout>
   );
 };
 

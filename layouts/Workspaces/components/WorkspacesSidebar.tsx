@@ -13,7 +13,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useUserQuery } from '@/graphql/user/UserQuery.generated';
 import { SkeletonList } from '@/components/SkeletonList';
-import AddWorkspaceModal from '@/layouts/components/AddWorkspaceModal';
+import AddWorkspaceModal from '@/layouts/Workspaces/components/AddWorkspaceModal';
 
 const WorkspacesSidebar: React.FC = () => {
   const { data, loading } = useUserQuery();

@@ -4,11 +4,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useWorkspaceQuery } from '@/graphql/workspace/QueryWorkspace.generated';
 import { Skeleton } from '@chakra-ui/react';
-
-import WorkspaceHeading from './components/WorkspaceHeading';
-import WorkspaceGrid from './components/WorkspaceGrid';
-import CreateFormButton from './components/CreateFormButton';
-import FormCard from './components/FormCard';
+import WorkspaceHeading from '@/components/Workspaces/WorkspaceHeading';
+import WorkspaceGrid from '@/components/Workspaces/WorkspaceGrid';
+import CreateFormButton from '@/components/Workspaces/CreateFormButton';
+import FormCard from '@/components/Workspaces/FormCard';
 
 const Workspaces: React.FC = () => {
   const router = useRouter();
