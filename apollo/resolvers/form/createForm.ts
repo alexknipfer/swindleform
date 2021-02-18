@@ -1,6 +1,6 @@
 import { GQLContext } from '@/apollo/interfaces';
+import { ensureUserOwnedWorkspace } from '@/db/workspace/queryHelpers';
 import { Form } from '@/models/form';
-import { ApolloError } from 'apollo-server-micro';
 
 interface Args {
   workspaceId: string;
@@ -11,11 +11,11 @@ export const createForm = async (
   { workspaceId }: Args,
   { db, session }: GQLContext,
 ) => {
-  const workspace = await db.workspaceRepo.get(workspaceId);
-
-  if (!workspace?.users.map(String).includes(session.user.id)) {
-    throw new ApolloError('Workspace not found', '404');
-  }
+  const workspace = await ensureUserOwnedWorkspace({
+    db,
+    workspaceId,
+    userId: session.user.id,
+  });
 
   const form = new Form();
   workspace.createForm(form);

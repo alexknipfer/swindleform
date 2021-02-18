@@ -2,6 +2,7 @@ import { Entity, SnapshotBase } from 'sourced';
 import * as uuid from 'uuid';
 
 import { Form } from './form';
+import { FormQuestion } from './question';
 
 export interface WorkspaceSnapshot extends SnapshotBase {
   users: string[];
@@ -57,6 +58,43 @@ export class Workspace extends Entity<Workspace, WorkspaceSnapshot> {
 
   createForm(form: Form) {
     this.forms.push(form);
+    this.formCount++;
     this.digest('createForm', form);
+  }
+
+  addFormQuestion({
+    formId,
+    question,
+  }: {
+    formId: string;
+    question: FormQuestion;
+  }) {
+    const form = this.findForm(formId);
+
+    this.ensureNoConflictingQuestionId(form, question.id);
+
+    form.questions.push(question);
+
+    this.digest('addFormQuestion', { formId, question });
+  }
+
+  private findForm(formId: string) {
+    const form = this.forms.find((f) => f.id === formId);
+
+    if (!form) {
+      throw new Error('Form not found');
+    }
+
+    return form;
+  }
+
+  private ensureNoConflictingQuestionId(form: Form, newId: string) {
+    const hasConflictingQuestionId = form.questions.some((q) => q.id === newId);
+
+    if (hasConflictingQuestionId) {
+      throw new Error(
+        'Question id conflict, all questions must have unique `id` field',
+      );
+    }
   }
 }

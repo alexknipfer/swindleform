@@ -1,5 +1,5 @@
 import { GQLContext } from '@/apollo/interfaces';
-import { ApolloError } from 'apollo-server-micro';
+import { ensureUserOwnedWorkspace } from '@/db/workspace/queryHelpers';
 
 interface Args {
   id: string;
@@ -8,15 +8,17 @@ interface Args {
 
 export const updateWorkspace = async (
   _: Record<string, never>,
-  { id, name }: Args,
+  { id: workspaceId, name }: Args,
   context: GQLContext,
 ) => {
-  const { db, session } = context;
-  const workspace = await db.workspaceRepo.get(id);
+  const {
+    db,
+    session: {
+      user: { id: userId },
+    },
+  } = context;
 
-  if (!workspace?.users.map(String).includes(session.user.id)) {
-    throw new ApolloError('Workspace not found', '404');
-  }
+  const workspace = await ensureUserOwnedWorkspace({ db, workspaceId, userId });
 
   workspace.updateName({ name });
   await db.workspaceRepo.commit(workspace);
